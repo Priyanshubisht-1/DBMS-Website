@@ -1,0 +1,294 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  height: 80px;
+  padding: 0 50px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  height: 43px;
+  width: auto;
+  margin-right: 20px;
+}
+
+/* Navigation */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #333;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  background-color: #e63946;
+  bottom: -4px;
+  top: 28px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #e63946;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 60px;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 60px;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.text-content h2 {
+  font-size: 56px;
+  color: #e63946;
+  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.text-content p {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary {
+  background-color: #e63946;
+  color: #fff;
+  border: none;
+}
+
+.primary:hover {
+  background-color: #c2182d;
+}
+
+.outline {
+  border: 2px solid #e63946;
+  color: #e63946;
+  background-color: transparent;
+}
+
+.outline:hover {
+  background-color: #ffe6e6;
+}
+
+/* main */
+
+.main {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 80px);
+}
+
+/* Sidebar */
+
+/* Title Styling */
+.Sidebar {
+  padding: 30px 20px;
+  min-width: 360px;
+  overflow-y: scroll;
+}
+
+.Sidebar-head {
+  font-size: 30px;
+  font-weight: 600;
+  color: #e63946;
+  margin-bottom: 30px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+
+  width: 100%;
+}
+.Sidebar-head:visited {
+  color: #e63946;
+}
+
+/* Link Box Styling */
+.sidebar-link {
+  display: block;
+  font-size: 18px;
+  text-decoration: none;
+  color: #444;
+  line-height: 1.6;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+  box-shadow: 0px 1px 8px 2px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-link:hover {
+  background-color: #e63946;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(230, 57, 70, 0.25);
+}
+
+/* Content */
+.content {
+  padding: 30px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.dbms-img {
+  height: 250px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.arch-img {
+  height: 400px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 40px;
+  transform: translateX(-30px);
+  border-radius: 20px;
+}
+
+.secondary-headings {
+  font-size: 36px;
+  color: #e63946;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.tertiary-headings {
+  color: #e63946;
+  font-size: 24px;
+  font-weight: 600;
+  margin-block: 12px;
+}
+
+.text {
+  font-size: 19px;
+  color: #444;
+  font-weight: 400;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.bold {
+  font-weight: 600;
+  color: #333;
+  font-size: 20px;
+}
+
+.parts {
+  padding-top: 20px;
+  margin-bottom: 50px;
+}
+.list {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.list-item {
+  margin-bottom: 14px;
+  font-size: 17px;
+  color: #333;
+}
+
+/* Code box */
+
+.code-box {
+  margin: 20px 30px;
+  padding: 20px;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 400;
+  position: relative;
+  border-radius: 10px;
+  border: 25px solid #ddd;
+  margin-bottom: 40px;
+}
+
+.code-box::before {
+  top: 0;
+  left: 0;
+  content: "";
+  display: block;
+  width: 6px;
+  background-color: #e63946;
+  height: 100%;
+  position: absolute;
+}
