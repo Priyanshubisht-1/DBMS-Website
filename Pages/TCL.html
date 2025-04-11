@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="#">Topics</a></li>
+          <li><a href="#">Quizzes</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">TCL Commands</a>
+        <a href="#commit" class="sidebar-link">Commit Command</a>
+        <a href="#rollback" class="sidebar-link">Rollback Command</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="commit">
+        <h2 class="secondary-headings">Commit Command</h2>
+        <p class="text">A <b>COMMIT</b> is an SQL command that enables the user to permanently save the current transactions or database statements in the relational database or the transaction table.</p>
+        <p class="text">Since the changes are permanently saved in the database, it is impossible to go back to the previous states in which the database began before the transaction began in the system.</p>
+        <p class="text"><b>Note : </b>Turn off the auto-commit by setting the value of auto-commit as 0.</p>
+        <pre class="code-box">
+mysql> SET autocommit = 0;   </pre>
+       
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+COMMIT;   </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCOM   |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCOM   |
+| 4061 | Neema     | BCOM   |
+| 4031 | Krish     | BTECH  |
+| 4021 | Rahul     | BTECH  |
++------+-----------+--------+
+8 rows in set (0.17 sec)
+
+mysql> delete from student;
+Query OK, 8 rows affected (4.15 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="rollback">
+        <h2 class="secondary-headings">Rollback Command</h2>
+        <p class="text">The <b>ROLLBACK</b> command is used to get back to the previous permanent status of the table, which is saved by the commit command.</p>
+        <p class="text"><b>Note :</b> if you have already committed your recent changes, you cannot rollback your transaction. In that case, you can only roll to the last permanent change.</p>
+        <p class="text"> -> Turn off the auto-commit by setting the value of auto-commit as 0.</p>
+        <pre class="code-box">
+mysql> SET autocommit = 0;   </pre>
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+ROLLBACK; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
+| 4062 | Neeraj    | BCA    |
++------+-----------+--------+
+2 rows in set (0.02 sec)
+
+mysql> delete from student;
+Query OK, 2 rows affected (0.19 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
+| 4062 | Neeraj    | BCA    |
++------+-----------+--------+
+2 rows in set (0.00 sec)
+</pre>
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

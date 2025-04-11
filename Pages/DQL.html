@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="#">Topics</a></li>
+          <li><a href="#">Quizzes</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">DQL Commands</a>
+        <a href="#select" class="sidebar-link">Select Command</a>
+        <a href="#select-2" class="sidebar-link">Select Command (All)</a>
+        <a href="#where" class="sidebar-link">Where clause</a>
+        <a href="#group" class="sidebar-link">Group by clause</a>
+        <a href="#having" class="sidebar-link">Having clause</a>
+        
+        <a href="#distinct" class="sidebar-link">Select Distinct clause</a>
+        <a href="#limit" class="sidebar-link">Limit clause</a>
+        <a href="#order" class="sidebar-link">Order By clause</a>
+        
+        
+      </section>
+
+    <section class="content">
+      <div class="parts" id="select">
+        <h2 class="secondary-headings">Select Command</h2>
+        <p class="text">The <b class="bold">SELECT</b> statement is used to select data from a database.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column1, column2, ...
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select roll,name from student;
++------+-----------+
+| roll | name      |
++------+-----------+
+| 4001 | Anmol     |
+| NULL | Mario     |
+| 4062 | Neeraj    |
+| 4064 | Priyanshu |
+| NULL | Max       |
++------+-----------+
+5 rows in set (0.61 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="select-2">
+        <h2 class="secondary-headings">Select Command (All)</h2>
+        <p class="text">It is also possible to select all columns at once.</p>
+        
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT * FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.02 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="where">
+        <h2 class="secondary-headings">Where clause</h2>
+        <p class="text">The <b>WHERE</b> clause is used to filter records.</p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition; </pre>
+            
+            <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student where roll is not NULL;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
++------+-----------+--------+
+3 rows in set (0.11 sec)
+</pre>
+</div>
+
+<div class="parts" id="group">
+<h2 class="secondary-headings">Group By clause </h2>
+        <p class="text">The <b>GROUP BY</b> statement groups rows that have the same values into summary rows, like "find the number of customers in each country"</p>
+
+        <p class="text">The <b>GROUP BY</b> statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);    </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCOM   |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCOM   |
+| 4061 | Neema     | BCOM   |
+| 4031 | Krish     | BTECH  |
+| 4021 | Rahul     | BTECH  |
++------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select course,Count(course) from student group by course;
++--------+---------------+
+| course | Count(course) |
++--------+---------------+
+| BCA    |             3 |
+| BCOM   |             3 |
+| BTECH  |             2 |
++--------+---------------+
+3 rows in set (0.14 sec)
+</pre>
+      </div>
+
+<div class="parts" id="having">
+<h2 class="secondary-headings">Having clause</h2>
+        <p class="text">The <b>HAVING</b> clause was added to SQL because the <b>WHERE</b> keyword cannot be used with aggregate functions</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s); </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCOM   |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCOM   |
+| 4061 | Neema     | BCOM   |
+| 4031 | Krish     | BTECH  |
+| 4021 | Rahul     | BTECH  |
++------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select course,Count(course) from student group by course having Count(course)>2;
++--------+---------------+
+| course | Count(course) |
++--------+---------------+
+| BCA    |             3 |
+| BCOM   |             3 |
++--------+---------------+
+2 rows in set (0.15 sec)
+</pre>
+      </div>
+
+<div class="parts" id="distinct">
+<h2 class="secondary-headings">Select Distinct statement</h2>
+        <p class="text">The <b>SELECT DISTINCT</b> statement is used to return only distinct (different) values</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT DISTINCT column_name FROM table_name    </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select distinct course from student;
++--------+
+| course |
++--------+
+| BCA    |
+| BCOM   |
+| BTECH  |
++--------+
+3 rows in set (0.08 sec)
+</pre>
+      </div>
+
+<div class="parts" id="limit">
+<h2 class="secondary-headings">Limit clause</h2>
+        <p class="text">The <b>LIMIT</b> clause is used to select a limited number of records</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT number;  </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select name,roll from student limit 2;
++-------+------+
+| name  | roll |
++-------+------+
+| Anmol | 4001 |
+| Mario | NULL |
++-------+------+
+2 rows in set (0.04 sec)
+
+</pre>
+      </div>
+
+<div class="parts" id="order">
+<h2 class="secondary-headings">Order By clause</h2>
+        <p class="text">The <b>ORDER BY</b> keyword is used to sort the result-set in ascending or descending order.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student order by name desc;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4021 | Rahul     | BTECH  |
+| 4064 | Priyanshu | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4061 | Neema     | BCOM   |
+| NULL | Max       | BCOM   |
+| NULL | Mario     | BCOM   |
+| 4031 | Krish     | BTECH  |
+| 4001 | Anmol     | BCA    |
++------+-----------+--------+
+8 rows in set (0.02 sec)
+</pre>
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

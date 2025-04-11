@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="#">Topics</a></li>
+          <li><a href="#">Quizzes</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Aggregate Functions</a>
+        <a href="#count" class="sidebar-link">Count( ) function</a>
+        <a href="#count-star" class="sidebar-link">Count(*) function</a>
+        <a href="#min" class="sidebar-link">Min( ) function</a>
+        <a href="#max" class="sidebar-link">Max( ) function</a>
+        <a href="#sum" class="sidebar-link">Sum( ) function</a>
+        <a href="#avg" class="sidebar-link">Avg( ) function</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="count">
+        <h2 class="secondary-headings">Count() function</h2>
+        <p class="text">The <b class="bold">Count()</b> function returns the number of rows (but ignore NULL values)</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT COUNT(column_name)
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select count(roll) from student;
++-------------+
+| count(roll) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="count-star">
+        <h2 class="secondary-headings">Count(*) function</h2>
+        <p class="text">The <b class="bold">Count(*)</b> function returns the number of rows (also includes NULL values)</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT COUNT(*)
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select count(*) from student;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (1.70 sec)
+
+</pre>
+      </div>
+
+      <div class="parts" id="min">
+        <h2 class="secondary-headings">Min( ) function</h2>
+        <p class="text">The <b class="bold">Min( )</b> function returns the smallest value of the selected column.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT MIN(column_name)
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.15 sec)
+
+mysql> select min(roll) from student;
++-----------+
+| min(roll) |
++-----------+
+|      4001 |
++-----------+
+1 row in set (0.09 sec)
+</pre>
+      </div>
+      <div class="parts" id="max">
+        <h2 class="secondary-headings">Max( ) function</h2>
+        <p class="text">The <b class="bold">Max( )</b> function returns the largest value of the selected column.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT MAX(column_name)
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.15 sec)
+
+mysql> select max(roll) from student;
++-----------+
+| max(roll) |
++-----------+
+|      4064 |
++-----------+
+1 row in set (0.05 sec)
+</pre>
+
+      </div>
+      <div class="parts" id="sum">
+        <h2 class="secondary-headings">Sum( ) function</h2>
+        <p class="text">The <b class="bold">Sum( )</b> function returns the total sum of a numeric column.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT SUM(column_name)
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.15 sec)
+
+mysql> select sum(roll) from student;
++-----------+
+| sum(roll) |
++-----------+
+|     12127 |
++-----------+
+1 row in set (0.09 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="avg">
+        <h2 class="secondary-headings">Avg( ) function</h2>
+        <p class="text">The <b class="bold">Avg( )</b> function returns the Average of a numeric column.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT AVG(column_name)
+FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4001 | Anmol     | BCA    |
+| NULL | Mario     | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4064 | Priyanshu | BCA    |
+| NULL | Max       | BCA    |
++------+-----------+--------+
+5 rows in set (0.02 sec)
+
+mysql> select avg(roll) from student;
++-----------+
+| avg(roll) |
++-----------+
+| 4042.3333 |
++-----------+
+1 row in set (0.04 sec)
+</pre>
+      </div>
+
+  </section>
+</body>
+</main>
+
+</html>

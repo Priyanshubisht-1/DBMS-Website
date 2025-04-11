@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="#">Topics</a></li>
+          <li><a href="#">Quizzes</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">DDL Commands</a>
+        <a href="#create" class="sidebar-link">Create Command</a>
+        <a href="#create-2" class="sidebar-link">Create Command (From Another Table)</a>
+        <a href="#alter-add" class="sidebar-link">Alter Command (Add)</a>
+        <a href="#alter-modify" class="sidebar-link">Alter Command (Modify)</a>
+        <a href="#alter-drop" class="sidebar-link">Alter Command (Drop)</a>
+        <a href="#drop" class="sidebar-link">Drop Command</a>
+        <a href="#truncate" class="sidebar-link">Truncate Command</a>
+        
+      </section>
+
+    <section class="content">
+      <div class="parts" id="create">
+        <h2 class="secondary-headings">Create Command</h2>
+        <p class="text">The <b class="bold">CREATE TABLE</b> statement is used to create a new table in a database</p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+CREATE TABLE table_name (
+  column1 datatype,
+  column2 datatype,
+  column3 datatype,
+ ....
+); </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> create table student (roll int,name varchar(20),course varchar(20));
+Query OK, 0 rows affected (0.96 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_temp |
++----------------+
+| student        |
++----------------+
+1 row in set (0.00 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="create-2">
+        <h2 class="secondary-headings">Create Command (from Another Table)</h2>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+CREATE TABLE new_table_name AS
+SELECT column1, column2,...
+FROM existing_table_name
+WHERE ....;  </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| roll   | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.04 sec)
+
+mysql> create table students_rec as select * from student;
+Query OK, 0 rows affected (1.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students_rec;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| roll   | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="alter-add">
+        <h2 class="secondary-headings">Alter Command (Add)</h2>
+        <p class="text">To add a column in a table</p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+ALTER TABLE table_name
+ADD column_name datatype;  </pre>
+            
+            <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> alter table student add contact bigint;
+Query OK, 0 rows affected (0.39 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll    | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| course  | varchar(20) | YES  |     | NULL    |       |
+| contact | bigint      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+</pre>
+</div>
+
+<div class="parts" id="alter-modify">
+<h2 class="secondary-headings">Alter Command (Modify)</h2>
+        <p class="text">To change the data type of a column in a table</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;   </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> alter table student modify contact char(10);
+Query OK, 0 rows affected (1.85 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll    | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| course  | varchar(20) | YES  |     | NULL    |       |
+| contact | char(10)    | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+</pre>
+      </div>
+
+<div class="parts" id="alter-drop">
+<h2 class="secondary-headings">Alter Command (Drop)</h2>
+        <p class="text">To delete a column in a table</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+ALTER TABLE table_name
+DROP COLUMN column_name;   </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> alter table student drop course;
+Query OK, 0 rows affected (2.52 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll    | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| contact | char(10)    | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.18 sec)
+</pre>
+      </div>
+
+<div class="parts" id="drop">
+<h2 class="secondary-headings">Drop Command</h2>
+        <p class="text">The <b>DROP TABLE</b> statement is used to drop an existing table in a database.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+DROP TABLE table_name;    </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> drop table student;
+Query OK, 0 rows affected (3.98 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_temp |
++----------------+
+| students_rec   |
++----------------+
+1 row in set (0.19 sec)
+</pre>
+      </div>
+
+<div class="parts" id="truncate">
+<h2 class="secondary-headings">Truncate Command</h2>
+        <p class="text">The <b>TRUNCATE TABLE</b> statement is used to delete the data inside a table, but not the table itself.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+TRUNCATE TABLE table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from students_rec;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
++------+-----------+--------+
+1 row in set (0.04 sec)
+
+mysql> truncate table students_rec;
+Query OK, 0 rows affected (1.74 sec)
+
+mysql> select * from students_rec;
+Empty set (0.00 sec)
+</pre>
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

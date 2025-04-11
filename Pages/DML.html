@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="#">Topics</a></li>
+          <li><a href="#">Quizzes</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">DML Commands</a>
+        <a href="#insert" class="sidebar-link">Insert Into Command</a>
+        <a href="#insert-2" class="sidebar-link">Insert Into Command (Specified columns)</a>
+        <a href="#insert-3" class="sidebar-link">Insert Into Command (Multiple rows)</a>
+        <a href="#update" class="sidebar-link">Update Command </a>
+        <a href="#update-all" class="sidebar-link">Update Command (All)</a>
+        
+        <a href="#delete" class="sidebar-link">Delete Command </a>
+        <a href="#delete-all" class="sidebar-link">Delete Command (All)</a>
+        
+        
+      </section>
+
+    <section class="content">
+      <div class="parts" id="insert">
+        <h2 class="secondary-headings">Insert Into Command</h2>
+        <p class="text">The <b class="bold">INSERT INTO</b> statement is used to insert new records in a table.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...); </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+            mysql> insert into student values (4064,'Priyanshu','BCA');
+            Query OK, 1 row affected (0.20 sec)
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
++------+-----------+--------+
+1 row in set (0.12 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="insert-2">
+        <h2 class="secondary-headings">Insert Into Command (Specified columns)</h2>
+        <p class="text">It is also possible to only insert data in specific columns.</p>
+        
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...); </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> insert into student (roll,name) values(4062,'Neeraj');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
+| 4062 | Neeraj    | NULL   |
++------+-----------+--------+
+2 rows in set (0.03 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="insert-3">
+        <h2 class="secondary-headings">Insert Into Command (Multiple rows)</h2>
+        <p class="text">It is also possible to only insert multiple rows.</p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+INSERT INTO table_name (column1, column2, column3, ...) VALUES 
+(value1, value2, value3, ...),
+(value1, value2, value3, ...), 
+(value1, value2, value3, ...), 
+...; </pre>
+            
+            <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> insert into student values
+    -> (4001,'Anmol','BCA'),
+    -> (4002,'Mario','BCA');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
+| 4062 | Neeraj    | NULL   |
+| 4001 | Anmol     | BCA    |
+| 4002 | Mario     | BCA    |
++------+-----------+--------+
+4 rows in set (0.00 sec)
+</pre>
+</div>
+
+<div class="parts" id="update">
+<h2 class="secondary-headings">Update Command </h2>
+        <p class="text">The <b>UPDATE</b> statement is used to modify the existing records in a table.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;   </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> update student set course = "BCA" where roll = 4062;
+Query OK, 1 row affected (0.14 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCA    |
+| 4062 | Neeraj    | BCA    |
+| 4001 | Anmol     | BCA    |
+| 4002 | Mario     | BCA    |
++------+-----------+--------+
+4 rows in set (0.02 sec)
+</pre>
+      </div>
+
+<div class="parts" id="update-all">
+<h2 class="secondary-headings">Update Command (All)</h2>
+        <p class="text">This will modify all the existing records in a table</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...;  </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> update student set course = "BCOM";
+Query OK, 4 rows affected (0.09 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCOM   |
+| 4062 | Neeraj    | BCOM   |
+| 4001 | Anmol     | BCOM   |
+| 4002 | Mario     | BCOM   |
++------+-----------+--------+
+4 rows in set (0.00 sec)
+</pre>
+      </div>
+
+<div class="parts" id="delete">
+<h2 class="secondary-headings">Delete Command</h2>
+        <p class="text">The <b>DELETE</b> statement is used to delete existing records in a table.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+DELETE FROM table_name WHERE condition;    </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> delete from student where name = 'Anmol';
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCOM   |
+| 4062 | Neeraj    | BCOM   |
+| 4002 | Mario     | BCOM   |
++------+-----------+--------+
+3 rows in set (0.00 sec)
+</pre>
+      </div>
+
+<div class="parts" id="delete-all">
+<h2 class="secondary-headings">Delete Command (All)</h2>
+        <p class="text">It is possible to delete all rows in a table without deleting the table.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+DELETE FROM table_name; </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++------+-----------+--------+
+| roll | name      | course |
++------+-----------+--------+
+| 4064 | Priyanshu | BCOM   |
+| 4062 | Neeraj    | BCOM   |
+| 4002 | Mario     | BCOM   |
++------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delete from student;
+Query OK, 3 rows affected (0.44 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+</pre>
+      </div>
+  </section>
+</body>
+</main>
+
+</html>
