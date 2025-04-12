@@ -280,9 +280,6 @@ header {
   border-radius: 10px;
   border: 25px solid #ddd;
   margin-bottom: 40px;
-  overflow-x:auto;
-  white-space: pre-wrap;
-  word-wrap: break-word; 
 }
 
 .code-box::before {
