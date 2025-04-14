@@ -3,6 +3,8 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #e63946 #f1f1f1;
 }
 
 html,
@@ -243,7 +245,7 @@ header {
   font-size: 19px;
   color: #444;
   font-weight: 400;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   line-height: 1.5;
 }
 
@@ -258,12 +260,16 @@ header {
   margin-bottom: 50px;
 }
 .list {
-  padding-left: 20px;
-  margin-top: 10px;
+  margin-left: 40px;
+}
+
+.list p {
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 
 .list-item {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   font-size: 17px;
   color: #333;
 }
@@ -280,6 +286,7 @@ header {
   border-radius: 10px;
   border: 25px solid #ddd;
   margin-bottom: 40px;
+  overflow-x: auto;
 }
 
 .code-box::before {
