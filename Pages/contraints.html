@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Contraints</a>
+        <a href="#not-null" class="sidebar-link">NOT NULL Constraint</a>
+        <a href="#unique" class="sidebar-link">UNIQUE Constraint</a>
+        <a href="#primary-key" class="sidebar-link">PRIMARY KEY Constraint</a>
+        <a href="#foreign-key" class="sidebar-link">FOREIGN KEY Constraint</a>
+        <a href="#check" class="sidebar-link">CHECK Constraint</a>
+        <a href="#default" class="sidebar-link">DEFAULT Constraint</a>
+        <a href="#auto-inc" class="sidebar-link">AUTO_INCREMENT Constraint</a>
+ 
+      </section>
+
+    <section class="content">
+      <div class="parts" id="not-null">
+        <h2 class="secondary-headings">NOT NULL Constraint</h2>
+        <p class="text">The <b>NOT NULL</b> constraint enforces a column to NOT accept NULL values. (Column Level Contraint)</p>
+        <p class="text">This enforces a field to always contain a value, which means that you cannot insert a new record, or update a record without adding a value to this field.</p>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> CREATE TABLE Persons (
+    ->     ID int NOT NULL,
+    ->     LastName varchar(255) NOT NULL,
+    ->     FirstName varchar(255) NOT NULL,
+    ->     Age int
+    -> );
+Query OK, 0 rows affected (5.13 sec)
+
+mysql> insert into Persons (ID,FirstName,LastName) values 
+    -> (4064,'Priyanshu',NULL);
+ERROR 1048 (23000): Column 'LastName' cannot be null
+</pre>
+      </div>
+
+      <div class="parts" id="unique">
+        <h2 class="secondary-headings">UNIQUE Constraint</h2>
+        <p class="text">The <b>UNIQUE</b> constraint ensures that all values in a column are different (Both Column level and Table level Constraint)</p>
+        <p class="text">Both the <b>UNIQUE</b> and <b>PRIMARY KEY</b> constraints provide a guarantee for uniqueness for a column or set of columns.</p>
+        <p class="text">However, you can have many <b>UNIQUE</b> constraints per table, but only one <b>PRIMARY KEY</b> constraint per table.</p>
+
+          <h3 class="tertiary-headings">Example (Column Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int unique,name varchar(20)
+    -> ,contact bigint unique);
+Query OK, 0 rows affected (1.34 sec)
+
+mysql> insert into student values(4064,'Priyanshu',1234567890);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into student values(4064,'Priyanshu',1234567890);
+ERROR 1062 (23000): Duplicate entry '4064' for key 'student.rollno'
+</pre>
+
+          <h3 class="tertiary-headings">Example (Table Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int,name varchar(20),contact bigint
+    -> , unique (rollno,contact));
+Query OK, 0 rows affected (0.48 sec)
+
+mysql> insert into student values(4064,'Priyanshu',1234567890);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into student values(4062,'Neeraj',1234567890);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into student values(4062,'Neeraj',1234567890);
+ERROR 1062 (23000): Duplicate entry '4062-1234567890' for key 'student.rollno'
+</pre>
+      </div>
+
+      <div class="parts" id="primary-key">
+        <h2 class="secondary-headings">PRIMARY KEY Constraint</h2>
+        <p class="text">The <b>PRIMARY KEY</b> constraint uniquely identifies each record in a table. (Both Column level and Table level Constraint)</p>
+        <p class="text">Primary keys must contain UNIQUE values, and cannot contain NULL values.</p>
+        <p class="text">A table can have only <b>ONE</b> primary key; and in the table, this primary key can consist of single or multiple columns (fields).</p>
+
+          <h3 class="tertiary-headings">Example (Column Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int primary key,name varchar(20)
+    -> ,contact bigint unique);
+Query OK, 0 rows affected (1.60 sec)
+
+mysql> insert into student values(4064,'Neeraj',1234567890);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into student values(4064,'Priyanshu',1234567890);
+ERROR 1062 (23000): Duplicate entry '4064' for key 'student.PRIMARY'
+mysql> insert into student values(NULL,'Priyanshu',1234567890);
+ERROR 1048 (23000): Column 'rollno' cannot be null
+</pre>
+
+          <h3 class="tertiary-headings">Example (Table Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int, name varchar(20), contact 
+    -> bigint, primary key(rollno,contact));
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> insert into student values(4064,'Priyanshu',1234567890);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into student values(4062,'Neeraj',1234567890);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into student values(4062,'Neeraj',1234567890);
+ERROR 1062 (23000): Duplicate entry '4062-1234567890' for key 'student.PRIMARY'
+mysql> insert into student values(4062,'Neeraj',NULL);
+ERROR 1048 (23000): Column 'contact' cannot be null
+</pre>
+      </div>
+
+      <div class="parts" id="foreign-key">
+        <h2 class="secondary-headings">FOREIGN KEY Constraint</h2>
+        <p class="text">The <b>FOREIGN KEY</b> constraint is used to prevent actions that would destroy links between tables. (Table level Constraint)</p>
+        <p class="text">A <b>FOREIGN KEY</b> is a field (or collection of fields) in one table, that refers to the <b>PRIMARY KEY</b> in another table.</p>
+        <p class="text">The table with the foreign key is called the <b>child table</b>, and the table with the primary key is called the <b>referenced</b> or <b>parent table</b>.</p>
+
+          <h3 class="tertiary-headings">Example (Table Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table marks(roll int unique,Sub1 int,Sub2 int,
+    -> Sub3 int, foreign key (roll) references student(rollno));
+Query OK, 0 rows affected (2.31 sec)
+
+mysql> insert into marks values(4064,92,45,64);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into marks values(NULL,92,45,64);
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into marks values(4024,92,45,64);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key 
+constraint fails (`temp`.`marks`, CONSTRAINT `marks_ibfk_1` FOREIGN KEY 
+(`roll`) REFERENCES `student` (`rollno`))
+</pre>
+      </div>
+
+      <div class="parts" id="check">
+        <h2 class="secondary-headings">CHECK Constraint</h2>
+        <p class="text">The <b>CHECK</b> constraint is used to limit the value range that can be placed in a column.(Both Column level and Table level Constraint)</p>
+        <p class="text">If you define a <b>CHECK</b> constraint on a column it will allow only certain values for this column.</p>
+        <p class="text">If you define a <b>CHECK</b> constraint on a table it can limit the values in certain columns based on values in other columns in the row.</p>
+
+          <h3 class="tertiary-headings">Example (Column Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int primary key check (rollno>4000), 
+    -> name varchar(20),contact bigint);
+Query OK, 0 rows affected (2.63 sec)
+
+mysql> insert into student values(4002,'Pavas',1234567890);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into student values(4000,'Pavas',1234567890);
+ERROR 3819 (HY000): Check constraint 'student_chk_1' is violated.
+</pre>
+
+          <h3 class="tertiary-headings">Example (Table Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int primary key, name varchar(20),
+    -> contact bigint, check(rollno>4000));
+Query OK, 0 rows affected (2.40 sec)
+
+mysql> insert into student values(4002,'Pavas',1234567890);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into student values(4000,'Pavas',1234567890);
+ERROR 3819 (HY000): Check constraint 'student_chk_1' is violated.
+</pre>
+      </div>
+
+      <div class="parts" id="default">
+        <h2 class="secondary-headings">DEFAULT Constraint</h2>
+        <p class="text">The <b>DEFAULT</b> constraint is used to set a default value for a column.(Column Level Constraint)</p>
+        <p class="text">The default value will be added to all new records, if no other value is specified.</p>
+
+          <h3 class="tertiary-headings">Example (Column Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int primary key, 
+    -> name varchar(20) default 'Unknown',contact bigint);
+Query OK, 0 rows affected (2.00 sec)
+
+mysql> insert into student(rollno,contact) values (4064,1234567890);
+Query OK, 1 row affected (0.40 sec)
+
+mysql> select * from student;
++--------+---------+------------+
+| rollno | name    | contact    |
++--------+---------+------------+
+|   4064 | Unknown | 1234567890 |
++--------+---------+------------+
+1 row in set (0.08 sec)
+</pre>
+
+      </div>
+      <div class="parts" id="auto-inc">
+        <h2 class="secondary-headings">AUTO_INCREMENT Constraint</h2>
+        <p class="text"><b>AUTO_INCREMENT</b> allows a unique number to be generated automatically when a new record is inserted into a table.</p>
+        <p class="text">Often this is the primary key field that we would like to be created automatically every time a new record is inserted.</p>
+
+          <h3 class="tertiary-headings">Example (Column Level Constraint):</h3>
+          <pre class="code-box">
+mysql> create table student (rollno int primary key auto_increment
+    -> , name varchar(20) ,contact bigint);
+Query OK, 0 rows affected (2.26 sec)
+
+mysql> insert into student (name,contact) values('Priyanshu',1234567890);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
++--------+-----------+------------+
+1 row in set (0.00 sec)
+</pre>
+
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

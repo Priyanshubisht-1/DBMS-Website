@@ -17,8 +17,7 @@
         <ul class="nav-links">
           <li><a href="../index.html">Home</a></li>
           <li><a href="page.html">Tutorials</a></li>
-          <li><a href="#">Topics</a></li>
-          <li><a href="#">Quizzes</a></li>
+          <li><a href="case.html">Case Study</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
       </nav>
@@ -36,6 +35,12 @@
         <a href="#distinct" class="sidebar-link">Select Distinct clause</a>
         <a href="#limit" class="sidebar-link">Limit clause</a>
         <a href="#order" class="sidebar-link">Order By clause</a>
+        <a href="#like" class="sidebar-link">Like Operator</a>
+        <a href="#in" class="sidebar-link">In Operator</a>
+        <a href="#between" class="sidebar-link">Between Operator</a>
+        <a href="#any" class="sidebar-link">Any Operator</a>
+        <a href="#all" class="sidebar-link">All Operator</a>
+        <a href="#Aliases" class="sidebar-link">Aliases</a>
         
         
       </section>
@@ -245,32 +250,242 @@ mysql> select name,roll from student limit 2;
 </pre>
       </div>
 
-<div class="parts" id="order">
-<h2 class="secondary-headings">Order By clause</h2>
-        <p class="text">The <b>ORDER BY</b> keyword is used to sort the result-set in ascending or descending order.</p>
+<div class="parts" id="like">
+<h2 class="secondary-headings">Like Operator</h2>
+        <p class="text">The <b>LIKE</b> operator is used in a WHERE clause to search for a specified pattern in a column. There are two wildcards often used in conjunction with the <b>LIKE</b> operator:</p>
+        <ul class="list">
+          <li><p class="text">The percent sign <b>%</b> represents zero, one, or multiple characters</p></li>
+          <li><p class="text">The underscore sign <b>_</b> represents one, single character</p></li>
+        </ul>
         
         <h3 class="tertiary-headings">Syntax:</h3>
         <pre class="code-box">
 SELECT column1, column2, ...
 FROM table_name
-ORDER BY column1, column2, ... ASC|DESC; </pre>
+WHERE columnN LIKE pattern; </pre>
 
           <h3 class="tertiary-headings">Example (with Output):</h3>
           <pre class="code-box">
-mysql> select * from student order by name desc;
-+------+-----------+--------+
-| roll | name      | course |
-+------+-----------+--------+
-| 4021 | Rahul     | BTECH  |
-| 4064 | Priyanshu | BCA    |
-| 4062 | Neeraj    | BCA    |
-| 4061 | Neema     | BCOM   |
-| NULL | Max       | BCOM   |
-| NULL | Mario     | BCOM   |
-| 4031 | Krish     | BTECH  |
-| 4001 | Anmol     | BCA    |
-+------+-----------+--------+
-8 rows in set (0.02 sec)
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where name like 'P%i%';
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+2 rows in set (1.37 sec)
+</pre>
+      </div>
+
+<div class="parts" id="in">
+<h2 class="secondary-headings">In Operator</h2>
+        <p class="text">The <b>IN</b> operator allows you to specify multiple values in a <b>WHERE</b> clause. It is a shorthand for multiple <b>OR</b> conditions.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...);  </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where rollno in (2,4,5);
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+</pre>
+      </div>
+
+<div class="parts" id="between">
+<h2 class="secondary-headings">Between Operator</h2>
+        <p class="text">The <b>BETWEEN</b> operator selects values within a given range. The values can be numbers, text, or dates. It is <b>inclusive</b>: begin and end values are included.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;   </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where rollno between 2 and 5;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.03 sec)
+</pre>
+      </div>
+
+<div class="parts" id="any">
+<h2 class="secondary-headings">Any Operator</h2>
+        <p class="text"><b>ANY</b> means that the condition will be true if the operation is true for any of the values in the range. The <b>ANY</b> operator:</p>
+        <ul class="list">
+          <li>
+            <p class="text">returns a boolean value as a result</p></li>
+          <li><p class="text">returns TRUE if ANY of the subquery values meet the condition</p></li>
+        </ul>
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ANY
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);  </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student where rollno between 2 and 5;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.03 sec)
+</pre>
+      </div>
+
+
+
+<div class="parts" id="all">
+<h2 class="secondary-headings">All Operator</h2>
+        <p class="text"><b>ALL</b> means that the condition will be true only if the operation is true for all values in the range. The <b>ALL</b> operator:</p>
+        <ul class="list">
+         
+          <li>
+            <p class="text">returns a boolean value as a result</p></li>
+          <li><p class="text">returns TRUE if ALL of the subquery values meet the condition</p></li>
+          <li><p class="text">is used with <b>SELECT</b>, <b>WHERE</b> and <b>HAVING</b> statements</p></li>
+        </ul>
+        <h3 class="tertiary-headings">Syntax:</h3>
+        
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ALL
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);  </pre>
+  <p class="text"><b>Note:</b> The operator must be a standard comparison operator (=, <>, !=, >, >=, <, or <=).</p>
+  <br/>
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.02 sec)
+
+mysql> select * from student where rollno > all(select rollno from marks);
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      5 | Parikshit | 1234567890 |
++--------+-----------+------------+
+1 row in set (0.00 sec)
+</pre>
+      </div>
+      <div class="parts" id="Aliases">
+<h2 class="secondary-headings">Aliases</h2>
+        <p class="text"><b>Aliases</b> are used to give a table, or a column in a table, a temporary name. They are often used to make column names more readable.</p>
+        <p class="text"> An alias only exists for the duration of that query. It is created with the <b>AS</b> keyword.</p>
+        <h3 class="tertiary-headings">Syntax:</h3>
+        
+        <pre class="code-box">
+SELECT column_name AS alias_name
+FROM table_name;  </pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.03 sec)
+
+mysql> select rollno,sub1+sub2+sub3 as 'Total' from marks;
++--------+-------+
+| rollno | Total |
++--------+-------+
+|      1 |   188 |
+|      3 |   233 |
+|      4 |    20 |
++--------+-------+
+3 rows in set (0.03 sec)
 </pre>
       </div>
   </section>

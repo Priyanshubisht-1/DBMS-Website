@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Decision Control Structure</a>
+        <a href="#if" class="sidebar-link">IF-THEN</a>
+        <a href="#if-else" class="sidebar-link">IF-THEN-ELSE</a>
+        <a href="#elsif" class="sidebar-link">IF-THEN-ELSIF</a>
+        <br/>
+        <a href="page.html" target="_parent" class="Sidebar-head">Iterative Control Structure</a>
+        <a href="#basic" class="sidebar-link">Basic LOOP</a>
+        <a href="#while" class="sidebar-link">WHILE LOOP</a>
+        <a href="#for" class="sidebar-link">FOR LOOP</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="if">
+        <h2 class="secondary-headings">IF-THEN Statement</h2>
+        <p class="text">The <b>IF</b> statement associates a condition with a sequence of statements enclosed by the keywords <b>THEN</b> and <b>END IF</b></p>
+        <p class="text">If the condition is <b>TRUE</b>, the statements get executed, and if the condition is <b>FALSE</b> or <b>NULL</b>, then the IF statement does nothing</p>
+       
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+IF condition THEN  
+    Statement; 
+END IF;   </pre>
+          <h3 class="tertiary-headings">Example:</h3>
+          <pre class="code-box">
+DECLARE
+  age NUMBER(3) := 19;
+BEGIN
+  IF age > 18 THEN
+    DBMS_Output.Put_Line('You are adult now!');
+  END IF;
+END;
+/
+</pre>
+          <h3 class="tertiary-headings">Output:</h3>
+          <pre class="code-box">
+You are adult now!
+</pre>
+      </div>
+      <div class="parts" id="if-else">
+        <h2 class="secondary-headings">IF-THEN-ELSE Statement</h2>
+        <p class="text">A sequence of <b>IF-THEN</b> statements can be followed by an optional sequence of <b>ELSE</b> statements, which execute when the condition is <b>FALSE</b></p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+IF condition THEN 
+    Statement-1;  
+ELSE  
+    Statement-2; 
+END IF;
+</pre>
+          <h3 class="tertiary-headings">Example:</h3>
+          <pre class="code-box">
+DECLARE
+  age NUMBER(3) := 9;
+BEGIN
+  IF age > 18 THEN
+    DBMS_Output.Put_Line('You are adult now!');
+  ELSE
+    DBMS_Output.Put_Line('You are a kid!');
+  END IF;
+END;
+/
+</pre>
+          <h3 class="tertiary-headings">Output:</h3>
+          <pre class="code-box">
+You are a kid!
+</pre>
+      </div>
+
+      <div class="parts" id="elsif">
+        <h2 class="secondary-headings">IF-THEN-ELSIF Statement</h2>
+        <p class="text">The <b>IF-THEN-ELSIF</b> statement allows you to choose between several alternatives. An <b>IF-THEN</b> statement can be followed by an optional <b>ELSIF...ELSE</b> statement.</p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+IF condition1 THEN
+  statement-1;
+ELSIF condition2 THEN
+  statement-2;
+ELSIF condition3 THEN
+  statement-3;
+ELSE
+  default statement
+END IF; </pre>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+DECLARE
+	age NUMBER(3) := 16;
+BEGIN
+	IF age > 18 THEN
+		DBMS_Output.Put_Line('You are adult now!');
+	ELSIF age > 15 THEN
+		DBMS_Output.Put_Line('You are a teenager!');
+	ELSE
+		DBMS_Output.Put_Line('You are a kid!');
+	END IF;
+END;
+/
+</pre>
+
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+You are a teenager!
+</pre>
+      </div>
+
+      <div class="parts" id="basic">
+        <h2 class="secondary-headings">Basic Loop</h2>
+        <p class="text">Basic loop structure encloses sequence of statements in between the <b>LOOP</b> and <b>END LOOP</b> statements. With each iteration, the sequence of statements is executed and then control resumes at the top of the loop</p>
+<h3 class="tertiary-headings">Syntax:</h3>
+<pre class="code-box">
+LOOP 
+    Sequence of statements; 
+    -- exit condition
+    IF condition THEN 
+      exit; 
+END LOOP; </pre>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+DECLARE
+  i NUMBER(2) := 1;
+BEGIN
+  LOOP
+    IF i = 5 THEN
+      exit;
+    END IF;
+    DBMS_Output.Put_line('Repetition: '|| i);
+    i := i+1;
+  END LOOP;
+END;
+/
+</pre>
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+Repetition: 1
+Repetition: 2
+Repetition: 3
+Repetition: 4
+</pre>
+
+      </div>
+
+      <div class="parts" id="while">
+        <h2 class="secondary-headings">While Loop</h2>
+        <p class="text">A <b>WHILE LOOP</b> statement in PL/SQL programming language repeatedly executes a target statement as long as a given condition is true</p>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+WHILE condition LOOP 
+   sequence_of_statements 
+END LOOP; 
+</pre>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+DECLARE
+  i NUMBER(2) := 1;
+BEGIN
+  WHILE  i <> 5 LOOP 
+    DBMS_Output.Put_line('Repetition: '|| i);
+    i := i+1;
+  END LOOP;
+END;
+/
+</pre>
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+Repetition: 1
+Repetition: 2
+Repetition: 3
+Repetition: 4
+</pre>
+</div>
+      <div class="parts" id="for">
+        <h2 class="secondary-headings">For Loop</h2>
+        <p class="text">A <b>FOR LOOP</b> is a repetition control structure that allows you to efficiently write a loop that needs to execute a specific number of times.</p>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+FOR counter IN initial_value .. final_value LOOP 
+  sequence_of_statements; 
+END LOOP;
+</pre>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+BEGIN
+  FOR  i IN 1 .. 4 LOOP 
+    DBMS_Output.Put_line('Repetition: '|| i);
+  END LOOP;
+END;
+/
+</pre>
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+Repetition: 1
+Repetition: 2
+Repetition: 3
+Repetition: 4
+</pre>
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

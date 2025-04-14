@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Exception Handling</a>
+        <a href="#exception" class="sidebar-link">Exceptions</a>
+        <a href="#pre" class="sidebar-link">Pre-Defined Exceptions</a>
+        <a href="#user" class="sidebar-link">User-Defined Exceptions</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="exception">
+        <h2 class="secondary-headings">Exceptions</h2>
+        <p class="text"><b>Exceptions</b> are runtime errors or unexpected events that occur during the execution of a PL/SQL code block.</p>
+        <p class="text">Exception handling can be done in the <b>EXCEPTION</b> part of PL/SQL program code block.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+DECLARE
+    -- Declaration statements;
+BEGIN
+    -- SQL statements;
+    -- Procedural statements;
+EXCEPTION
+    -- Exception handling statements;
+END;  </pre>
+
+      <div class="parts" id="pre">
+        <h2 class="secondary-headings">Pre-Defined Exceptions</h2>
+        <p class="text">Such exceptions are the <b>pre defined</b> names given by oracle for those exceptions that occur most commonly.</p>
+        <p class="text">There are number of pre-defined named exceptions available by default. Few of them are:</p>
+        <ul class="list">
+          <li><p class="text"><b>TOO_MANY_ROWS : </b>Occurs when select statement returns more than one row.</p></li>
+          <li><p class="text"><b>VALUE_ERROR : </b>Occurs when invalid datatype or size is given by the user.</p></li>
+          <li><p class="text"><b>NO_DATA_FOUND : </b>Occurs when no records are found.</p></li>
+          <li><p class="text"><b>PROGRAM_ERROR : </b>Occurs when internal error arise in program.</p></li>
+          <li><p class="text"><b>ZERO_DIVIDE : </b>Occurs when the division of any variable value is done by zero.</p></li>
+        </ul>
+        <br/>
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+EXCEPTION
+  WHEN &lt;exception_name> THEN
+    -- take action</pre>
+          <h3 class="tertiary-headings">Example: </h3>
+          <pre class="code-box">
+DECLARE
+  a Number(2) := 11;
+  b Number(2) := 0;
+  c Number(2);
+BEGIN
+  c := a/b;
+  dbms_output.put_line('RESULT=' || c);
+EXCEPTION
+  when ZERO_DIVIDE then
+    dbms_output.put_line('Division by 0 is not possible');
+END;
+</pre>
+          <h3 class="tertiary-headings">Output: </h3>
+          <pre class="code-box">
+Division by 0 is not possible
+</pre>
+      </div>
+
+      <div class="parts" id="user">
+        <h2 class="secondary-headings">User-Defined Exceptions</h2>
+        <p class="text">PL/SQL allows you to define your own exceptions according to the need of your program. A <b>user-defined</b> exception must be declared and then raised explicitly, using either a <b>RAISE</b> statement or the procedure <b>DBMS_STANDARD.RAISE_APPLICATION_ERROR</b></p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+DECLARE
+    exception_name EXCEPTION;
+BEGIN
+  IF condition THEN
+    RAISE exception_name;
+  END IF;
+EXCEPTION
+  WHEN exception_name THEN
+    -- Exception handling statements
+END;   </pre>
+  
+  <h3 class="tertiary-headings">Example:</h3>
+  <pre class="code-box">
+DECLARE
+  a Number(2) := -11;
+  negative_number exception;
+BEGIN
+  IF (a < 0) THEN
+    RAISE negative_number;
+  END IF;
+  dbms_output.put_line('Number is positive');
+EXCEPTION
+  WHEN negative_number THEN
+  dbms_output.put_line('Number can not be negative');
+END;
+</pre>
+<h3 class="tertiary-headings">Output:</h3>
+<pre class="code-box">
+Number can not be negative</pre>
+</div>
+</section>
+</body>
+</main>
+
+</html>

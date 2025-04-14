@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">DCL Commands</a>
+        <a href="#grant" class="sidebar-link">Grant Command</a>
+        <a href="#revoke" class="sidebar-link">Revoke Command</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="grant">
+        <h2 class="secondary-headings">Grant Command</h2>
+        <p class="text">The <b>GRANT</b> statement is used to give user's permissions to a database</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+GRANT privilege_name
+ON object_name
+TO {user_name |PUBLIC |role_name}
+[WITH GRANT OPTION];
+ </pre>
+
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> create user tester identified by 'tester123';
+Query OK, 0 rows affected (1.31 sec)
+
+mysql> grant select,insert on student to tester;
+Query OK, 0 rows affected (0.12 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="revoke">
+        <h2 class="secondary-headings">Revoke Command</h2>
+        <p class="text">The <b>REVOKE</b> statement is used to take back permissions from a user</p>
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+REVOKE privilege_name
+ON object_name
+FROM {user_name |PUBLIC |role_name}   </pre>
+
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> create user tester identified by 'tester123';
+Query OK, 0 rows affected (1.31 sec)
+
+mysql> grant select,insert on student to tester;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> revoke select,insert on student from tester;
+Query OK, 0 rows affected (0.11 sec)
+</pre>
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

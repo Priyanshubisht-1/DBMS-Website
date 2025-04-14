@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Cursor</a>
+        <a href="#implicit" class="sidebar-link">Implicit Cursor</a>
+        <a href="#explicit" class="sidebar-link">Explicit Cursor</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="implicit">
+        <h2 class="secondary-headings">Implicit Cursor</h2>
+        <p class="text"><b>Implicit cursors</b> are automatically created by Oracle whenever an SQL statement is executed, when there is <b>no</b> explicit cursor for the statement.</p>
+        <p class="text"> Programmers cannot control the implicit cursors and the information in it.In PL/SQL, you can refer to the most recent implicit cursor as the SQL cursor, which always has attributes such as</p>
+        <ul class="list">
+          <li><p class="text"><b>%FOUND : </b>Returns TRUE if an INSERT, UPDATE, or DELETE statement affected one or more rows or a SELECT INTO statement returned one or more rows. Otherwise, it returns FALSE.</p></li>
+          <li><p class="text"><b>%NOTFOUND : </b>Returns TRUE if an INSERT, UPDATE, or DELETE statement affected no rows, or a SELECT INTO statement returned no rows. Otherwise, it returns FALSE.</p></li>
+          <li><p class="text"><b>%ISOPEN : </b>Always returns FALSE for implicit cursors, because Oracle closes the SQL cursor automatically after executing its associated SQL statement.</p></li>
+          <li><p class="text"><b>%ROWCOUNT : </b>Returns the number of rows affected by an INSERT, UPDATE, or DELETE statement, or returned by a SELECT INTO statement.</p></li>
+        </ul>
+
+        <h3 class="tertiary-headings">Example (Table):</h3>
+        <pre class="code-box">
+Select * from customers;  
+
++----+----------+-----+-----------+----------+ 
+| ID | NAME     | AGE | ADDRESS   | SALARY   | 
++----+----------+-----+-----------+----------+ 
+|  1 | Ramesh   |  32 | Ahmedabad |  2000.00 | 
+|  2 | Khilan   |  25 | Delhi     |  1500.00 | 
+|  3 | kaushik  |  23 | Kota      |  2000.00 | 
+|  4 | Chaitali |  25 | Mumbai    |  6500.00 | 
+|  5 | Hardik   |  27 | Bhopal    |  8500.00 | 
+|  6 | Komal    |  22 | MP        |  4500.00 | 
++----+----------+-----+-----------+----------+
+   </pre>
+          <h3 class="tertiary-headings">Example:</h3>
+          <pre class="code-box">
+DECLARE  
+  total_rows number(2); 
+BEGIN 
+  UPDATE customers 
+    SET salary = salary + 500; 
+  IF sql%notfound THEN 
+    dbms_output.put_line('no customers selected'); 
+  ELSIF sql%found THEN 
+    total_rows := sql%rowcount;
+    dbms_output.put_line( total_rows || ' customers selected '); 
+  END IF;  
+END; 
+/ 
+</pre>
+          <h3 class="tertiary-headings">Output:</h3>
+          <pre class="code-box">
+6 customers selected 
+</pre>
+      </div>
+      <div class="parts" id="explicit">
+        <h2 class="secondary-headings">Explicit Cursor</h2>
+        <p class="text"><b>Explicit cursors</b> are programmer-defined cursors for gaining more control over the context area.An explicit cursor should be defined in the declaration section of the PL/SQL Block.</p><p class="text">It is created on a <b>SELECT</b> Statement which returns more than one row. Working with an explicit cursor includes the following steps −</p>
+
+          <ul class="list">
+            <li><p class=text>Declaring the cursor for initializing the memory</p></li>
+            <pre class="code-box">
+CURSOR c_customers IS 
+  SELECT id, name, address FROM customers;</pre>
+            <li><p class=text>Opening the cursor for allocating the memory</p></li>
+            <pre class="code-box">
+OPEN c_customers; </pre>
+            <li><p class=text>Fetching the cursor for retrieving the data</p></li>
+            <pre class="code-box">
+FETCH c_customers INTO c_id, c_name, c_addr; </pre>
+            <li><p class=text>Closing the cursor to release the allocated memory</p></li>
+            <pre class="code-box">
+CLOSE c_customers;</pre>
+          </ul>
+          <h3 class="tertiary-headings">Example:</h3>
+          <pre class="code-box">
+DECLARE 
+   c_id customers.id%type; 
+   c_name customers.name%type; 
+   c_addr customers.address%type; 
+   CURSOR c_customers is 
+      SELECT id, name, address FROM customers; 
+BEGIN 
+   OPEN c_customers; 
+   LOOP 
+   FETCH c_customers into c_id, c_name, c_addr; 
+      EXIT WHEN c_customers%notfound; 
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr); 
+   END LOOP; 
+   CLOSE c_customers; 
+END; 
+/
+</pre>
+          <h3 class="tertiary-headings">Output:</h3>
+          <pre class="code-box">
+1 Ramesh Ahmedabad
+2 Khilan Delhi
+3 kaushik Kota
+4 Chaitali Mumbai
+5 Hardik Bhopal
+6 Komal MP
+</pre>
+      </div>
+
+  </section>
+</body>
+</main>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Basics</a>
+        <a href="#block" class="sidebar-link">Block Structure</a>
+        <a href="#datatypes" class="sidebar-link">Datatypes</a>
+        <a href="#variable" class="sidebar-link">Variable</a>
+        <a href="#constant" class="sidebar-link">Constant</a>
+        <a href="#scope" class="sidebar-link">Variable Scope</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="block">
+        <h2 class="secondary-headings">Block Structure</h2>
+        <p class="text">PL/SQL programs are divided and written in logical blocks of code. Each block consists of:</p>
+        <ul class="list">
+          <li><p class=text><b>Declaration Section:</b> This section starts with the keyword <b>DECLARE</b>. It is an optional section and defines all variables, cursors, subprograms, and other elements to be used in the program.</p></li>
+          <li><p class=text><b>Executable Commands:</b> This section is enclosed between the keywords <b>BEGIN</b> and <b>END</b>. It is a mandatory section. It consists of the executable PL/SQL statements of the program.</p></li>
+          <li><p class=text><b>Exception Handling :</b> This section starts with the keyword <b>EXCEPTION</b>. This optional section contains exception(s) that handle errors in the program.</p></li>
+        </ul>
+       
+        <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+DECLARE 
+   -- declarations section 
+BEGIN 
+   -- executable command(s)
+EXCEPTION 
+   -- exception handling 
+END;   </pre>
+
+          <h3 class="tertiary-headings">Example:</h3>
+          <pre class="code-box">
+DECLARE 
+   message  varchar2(20):= 'Hello, World!'; 
+BEGIN 
+   dbms_output.put_line(message); 
+END; 
+/ 
+</pre>
+          <h3 class="tertiary-headings">Output:</h3>
+          <pre class="code-box">
+Hello, World!
+</pre>
+      </div>
+      <div class="parts" id="datatypes">
+        <h2 class="secondary-headings">Datatypes</h2>
+        <p class="text">PL/SQL supports various data types similar to SQL but with additional types for better control and flexibility. These types define the kind of data a variable can store, such as numbers, characters, dates, and more.</p>
+        <ul class="list">
+          <li><p class=text><b>NUMBER(p, s):</b> used to store numeric values.(p : Total number of digits, s : Number of digits to the right of the decimal)</p></li>
+          <li><p class=text><b>VARCHAR2(n):</b> Variable-length character string (n: size of string)</p></li>
+          <li><p class=text><b>CHAR(n):</b> Fixed-length character string (n: size of string)</p></li>
+          <li><p class=text><b>DATE:</b> stores date ('DD-MON-YY')</p></li>
+          <li><p class=text><b>BOOLEAN:</b> Stores TRUE, FALSE, or NULL</p></li>
+        </ul>
+
+          <h3 class="tertiary-headings">Example:</h3>
+          <pre class="code-box">
+DECLARE 
+    x number(5,3) := 29.111;
+    y varchar2(20):= 'Hello, World!'; 
+    z date := '01-APR-05';
+BEGIN 
+    dbms_output.put_line(x); 
+    dbms_output.put_line(y); 
+    dbms_output.put_line(z); 
+END; 
+/
+</pre>
+          <h3 class="tertiary-headings">Output:</h3>
+          <pre class="code-box">
+29.111
+Hello, World!
+01-APR-05
+</pre>
+      </div>
+
+      <div class="parts" id="variable">
+        <h2 class="secondary-headings">Variable</h2>
+        <p class="text">A <b>variable</b> in PL/SQL is referred to as a storage location that holds a value of a certain data type. A variable must be declared in the declaration section of a block before being used.</p>
+
+          <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+variable_name datatype [NOT NULL] [:= initial_value] </pre>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+DECLARE 
+name varchar(20) := 'Priyanshu';
+dob date:= '13-APR-05';
+BEGIN 
+dbms_output.put_line(name || ' was born in '|| dob);
+END; 
+/
+</pre>
+
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+Priyanshu was born in 13-APR-05
+</pre>
+      </div>
+
+      <div class="parts" id="constant">
+        <h2 class="secondary-headings">Constant</h2>
+        <p class="text"><b>Constants</b> are those values which when declared remain fixed throughout the PL/SQL block. For declaring constants, a <b>constant</b> keyword is used.</p>
+<h3 class="tertiary-headings">Syntax:</h3>
+<pre class="code-box">
+constant_name CONSTANT data_type := fixed_value; </pre>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+DECLARE 
+    name varchar(20) := 'Priyanshu';
+    dob constant date:= '13-APR-05';
+BEGIN 
+    dob := '14-APR-05';	--ERROR
+    dbms_output.put_line(name || ' was born in '|| dob);
+END; 
+/
+</pre>
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+ORA-06550: line 5, column 5:
+PLS-00363: expression 'DOB' cannot be used as an assignment target
+</pre>
+
+      </div>
+
+      <div class="parts" id="scope">
+        <h2 class="secondary-headings">Variable Scope</h2>
+        <p class="text">PL/SQL allows the nesting of blocks. There are two types of variable scope:</p>
+        <ul class="list">
+          <li><p class="text"><b>Local variables: </b>Variables declared in an inner block and not accessible to outer blocks.</p></li>
+          <li><p class="text"><b>Global variables: </b>Variables declared in the outermost block or a package.</p></li>
+        </ul>
+
+<h3 class="tertiary-headings">Example :</h3>
+<pre class="code-box">
+DECLARE 
+    -- Global variables  
+    num1 number := 95;  
+    num2 number := 85;  
+BEGIN  
+    dbms_output.put_line('Outer Variable num1: ' || num1); 
+    dbms_output.put_line('Outer Variable num2: ' || num2); 
+    DECLARE  
+      -- Local variables 
+      num1 number := 195;  
+      num2 number := 185;  
+    BEGIN  
+      dbms_output.put_line('Inner Variable num1: ' || num1); 
+      dbms_output.put_line('Inner Variable num2: ' || num2); 
+    END;  
+END; 
+/ 
+</pre>
+<h3 class="tertiary-headings">Output :</h3>
+<pre class="code-box">
+Outer Variable num1: 95
+Outer Variable num2: 85
+Inner Variable num1: 195
+Inner Variable num2: 185
+</pre>
+
+      </div>
+  </section>
+</body>
+</main>
+
+</html>

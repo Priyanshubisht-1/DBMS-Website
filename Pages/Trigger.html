@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Triggers</a>
+        <a href="#trigger" class="sidebar-link">Trigger</a>
+        <a href="#bst" class="sidebar-link">Before Statement-level Trigger</a>
+        <a href="#ast" class="sidebar-link">After Statement-level Trigger</a>
+        <a href="#brt" class="sidebar-link">Before Row-level Trigger</a>
+        <a href="#art" class="sidebar-link">After Row-level Trigger</a>
+        <a href="#drop" class="sidebar-link">Drop Trigger</a>
+      </section>
+
+    <section class="content">
+      <div class="parts" id="trigger">
+        <h2 class="secondary-headings">Trigger</h2>
+        <p class="text"><b>Triggers</b> are stored programs, which are automatically executed or fired when some events occur. Triggers are, in fact, written to be executed in response to any of the following events:</p>
+        <ul class="list">
+          <li>
+            <p class="text">A <b>database manipulation</b> (DML) statement (DELETE, INSERT, or UPDATE)</p>
+          </li>
+          <li>
+            <p class="text">A <b>database definition</b> (DDL) statement (CREATE, ALTER, or DROP).</p>
+          </li>
+        </ul>
+          
+          <h3 class="tertiary-headings">Syntax:</h3>
+        <pre class="code-box">
+CREATE [OR REPLACE ] TRIGGER trigger_name  
+{BEFORE | AFTER | INSTEAD OF }  
+{INSERT [OR] | UPDATE [OR] | DELETE}  
+[OF col_name]  
+ON table_name  
+[REFERENCING OLD AS o NEW AS n]  
+[FOR EACH ROW]  
+WHEN (condition)   
+DECLARE 
+   Declaration-statements 
+BEGIN  
+   Executable-statements 
+EXCEPTION 
+   Exception-handling-statements 
+END;  </pre>
+
+      <div class="parts" id="bst">
+        <h2 class="secondary-headings">Before Statement-level Trigger</h2>
+        <p class="text">This trigger occurs before the execution of a SQL query. It can be used to take actions or validations before processing the statement. </p>
+          <h3 class="tertiary-headings">Example (Table): </h3>
+          <pre class="code-box">
+create table student(
+  rollno Number(4),
+  name varchar2(30),
+  contact char(10),
+  course varchar(10)
+);
+</pre>
+          <h3 class="tertiary-headings">Example (Trigger): </h3>
+          <pre class="code-box">
+CREATE OR REPLACE TRIGGER before_statement_trigger
+BEFORE INSERT ON student
+BEGIN
+  DBMS_Output.put_line('Insert Satement is fired on ' || CURRENT_DATE());
+END;
+</pre>
+          <h3 class="tertiary-headings">Example : </h3>
+          <pre class="code-box">
+insert into student values(4064,'Priyanshu','1234567890','BCA');
+</pre>
+          <h3 class="tertiary-headings">Output: </h3>
+          <pre class="code-box">
+1 row(s) inserted.
+Insert Satement is fired on 14-APR-25
+</pre>
+      </div>
+
+      <div class="parts" id="ast">
+        <h2 class="secondary-headings">After Statement-level Trigger</h2>
+        <p class="text">Upon execution of a SQL statement, this trigger occurs. It can be used to conduct actions based on the statement’s overall outcome.</p>
+          <h3 class="tertiary-headings">Example (Table): </h3>
+          <pre class="code-box">
+create table student(
+  rollno Number(4),
+  name varchar2(30),
+  contact char(10),
+  course varchar(10)
+);
+</pre>
+          <h3 class="tertiary-headings">Example (Trigger): </h3>
+          <pre class="code-box">
+CREATE OR REPLACE TRIGGER after_statement_trigger
+AFTER INSERT ON student
+BEGIN
+  DBMS_Output.put_line('Inserted Successfully on ' || CURRENT_DATE());
+END;
+</pre>
+          <h3 class="tertiary-headings">Example : </h3>
+          <pre class="code-box">
+insert into student values(4064,'Priyanshu','1234567890','BCA');
+</pre>
+          <h3 class="tertiary-headings">Output: </h3>
+          <pre class="code-box">
+1 row(s) inserted.
+Inserted Successfully on 14-APR-25
+</pre>
+      </div>
+
+      <div class="parts" id="brt">
+        <h2 class="secondary-headings">Before Row-level Trigger</h2>
+        <p class="text">This trigger occurs before the insertion, update, or deletion of a row. It may be used to change the values of the currently processed row.</p>
+          <h3 class="tertiary-headings">Example (Table): </h3>
+          <pre class="code-box">
+create table student(
+  rollno Number(4),
+  name varchar2(30),
+  contact char(10),
+  course varchar(10)
+);
+</pre>
+          <h3 class="tertiary-headings">Example (Trigger): </h3>
+          <pre class="code-box">
+CREATE OR REPLACE TRIGGER before_row_trigger
+BEFORE INSERT ON student
+FOR EACH ROW
+BEGIN
+	IF (:NEW.rollno < 0) THEN
+    	:NEW.rollno := - :NEW.rollno;
+		DBMS_Output.Put_Line('rollno is converted to positive');
+	END IF;
+END;
+</pre>
+          <h3 class="tertiary-headings">Example : </h3>
+          <pre class="code-box">
+insert into student values(-4062,'Neeraj','1234567890','BCA');
+select * from student;
+</pre>
+          <h3 class="tertiary-headings">Output: </h3>
+          <pre class="code-box">
+1 row(s) inserted.
+rollno is converted to positive
+
++--------+-----------+------------+-----------+
+| ROLLNO |   NAME    |  CONTACT   |   COURSE  |
++--------+-----------+------------+-----------+
+| 4064   | Priyanshu | 1234567890 | BCA       |
+| 4062   | Neeraj    | 1234567890 | BCA       |
++--------+-----------+------------+-----------+
+</pre>
+      </div>
+
+      <div class="parts" id="art">
+        <h2 class="secondary-headings">After Row-level Trigger</h2>
+        <p class="text">This trigger occurs after the insertion, update, or deletion of a row. It may be used to conduct actions based on the row’s modifications. </p>
+          <h3 class="tertiary-headings">Example (Table): </h3>
+          <pre class="code-box">
+create table student(
+  rollno Number(4),
+  name varchar2(30),
+  contact char(10),
+  course varchar(10)
+);
+</pre>
+          <h3 class="tertiary-headings">Example (Trigger): </h3>
+          <pre class="code-box">
+CREATE OR REPLACE TRIGGER after_row_trigger
+AFTER INSERT ON student
+FOR EACH ROW
+BEGIN
+    DBMS_Output.Put_Line('Insert Successfully on ' || CURRENT_DATE());
+    DBMS_Output.Put_Line('rollno  -> '|| :new.rollno);
+    DBMS_Output.Put_Line('name    -> '|| :new.name);
+    DBMS_Output.Put_Line('contact -> '|| :new.contact);
+    DBMS_Output.Put_Line('course  -> '|| :new.course);
+END;
+</pre>
+          <h3 class="tertiary-headings">Example : </h3>
+          <pre class="code-box">
+insert into student values(4015,'Karan Kamboj','1234567890','BCA');
+</pre>
+          <h3 class="tertiary-headings">Output: </h3>
+          <pre class="code-box">
+1 row(s) inserted.            
+Insert Successfully on 13-APR-25
+rollno  -> 4015
+name    -> Karan Kamboj
+contact -> 1234567890
+course  -> BCA
+</pre>
+      </div>
+
+      <div class="parts" id="drop">
+        <h2 class="secondary-headings">Drop Trigger</h2>
+        <p class="text">To drop a trigger, Drop Trigger statement is used. </p>
+          <h3 class="tertiary-headings">Example (Table): </h3>
+          <pre class="code-box">
+create table student(
+  rollno Number(4),
+  name varchar2(30),
+  contact char(10),
+  course varchar(10)
+);
+</pre>
+          <h3 class="tertiary-headings">Example (Trigger): </h3>
+          <pre class="code-box">
+CREATE OR REPLACE TRIGGER trig_1
+AFTER INSERT ON student
+FOR EACH ROW
+BEGIN
+    DBMS_Output.Put_Line('Insert Successfully on ' || CURRENT_DATE());
+    DBMS_Output.Put_Line('rollno  -> '|| :new.rollno);
+    DBMS_Output.Put_Line('name    -> '|| :new.name);
+    DBMS_Output.Put_Line('contact -> '|| :new.contact);
+    DBMS_Output.Put_Line('course  -> '|| :new.course);
+END;
+</pre>
+          <h3 class="tertiary-headings">Example : </h3>
+          <pre class="code-box">
+insert into student values(4039,'Ansh','1234567890','BCA');
+drop trigger trig_1;
+insert into student values(4008,'Pavas','1234567890','BCA');
+</pre>
+          <h3 class="tertiary-headings">Output: </h3>
+          <pre class="code-box">
+1 row(s) inserted.
+Insert Successfully on 13-APR-25
+rollno  -> 4039
+name    -> Ansh
+contact -> 1234567890
+course  -> BCA
+
+Trigger dropped.
+1 row(s) inserted.
+</pre>
+      </div>
+</section>
+</body>
+</main>
+
+</html>

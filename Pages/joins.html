@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DBMaster - Learn DBMS</title>
+    <link rel="stylesheet" href="../CSS/style-pages.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <img src="../Images/logo.png" alt="DB Master Logo" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="page.html">Tutorials</a></li>
+          <li><a href="case.html">Case Study</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="Sidebar">
+        <a href="page.html" target="_parent" class="Sidebar-head">Join Operators</a>
+        <a href="#inner" class="sidebar-link">Inner Join</a>
+        <a href="#left" class="sidebar-link">Left Join</a>
+        <a href="#right" class="sidebar-link">Right Join</a>
+        <a href="#full" class="sidebar-link">Full Outer Join</a>
+        <a href="#cross" class="sidebar-link">Cross Join</a>
+        <a href="#self" class="sidebar-link">Self Join</a>
+        <br/>
+        <a href="page.html" target="_parent" class="Sidebar-head">Set Operators</a>
+        <a href="#union" class="sidebar-link">Union</a>
+        <a href="#union-all" class="sidebar-link">Union All</a>
+        <a href="#intersect" class="sidebar-link">Intersect</a>
+        <a href="#minus" class="sidebar-link">Minus</a>
+ 
+      </section>
+
+    <section class="content">
+      <div class="parts" id="inner">
+        <h2 class="secondary-headings">Inner Join</h2>
+        <p class="text">The <b>INNER JOIN</b> keyword selects records that have matching values in both tables.</p>
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+</pre>   
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student 
+    -> inner join marks on student.rollno = marks.rollno;
++-----------+-------+
+| name      | Total |
++-----------+-------+
+| Priyanshu |   188 |
+| Akhil     |   233 |
++-----------+-------+
+2 rows in set (0.00 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="left">
+        <h2 class="secondary-headings">Left Join (Left Outer Join)</h2>
+        <p class="text">The <b>LEFT JOIN</b> keyword returns all records from the left table (table1), and the matching records from the right table (table2). The result is 0 records from the right side, if there is no match.</p>
+        <h3 class="tertiary-headings">Syntax:</h3>  
+        <pre class="code-box">
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+</pre>   
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student 
+    -> left join marks on student.rollno = marks.rollno;
++-----------+-------+
+| name      | Total |
++-----------+-------+
+| Priyanshu |   188 |
+| Neeraj    |  NULL |
+| Akhil     |   233 |
++-----------+-------+
+3 rows in set (0.00 sec)
+</pre>
+
+
+      <div class="parts" id="right">
+        <h2 class="secondary-headings">Right Join (Right Outer Join)</h2>
+        <p class="text">The <b>RIGHT JOIN</b> keyword returns all records from the right table (table2), and the matching records from the left table (table1). The result is 0 records from the left side, if there is no match.</p>
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+</pre>     
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student 
+    -> right join marks on student.rollno = marks.rollno;
++-----------+-------+
+| name      | Total |
++-----------+-------+
+| Priyanshu |   188 |
+| Akhil     |   233 |
+| NULL      |    20 |
++-----------+-------+
+3 rows in set (0.04 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="full">
+        <h2 class="secondary-headings">Full join (Full Outer Join)</h2>
+        <p class="text">The <b>FULL OUTER JOIN</b> keyword returns all records when there is a match in left (table1) or right (table2) table records.</p>
+        <p class="text"><b>Note :</b> There is no direct Full Outer Join keyword instead need to use <b>Union</b> of left outer join and right outer join</p>
+ 
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student left outer join 
+    -> marks on student.rollno = marks.rollno union select name
+    -> ,sub1+sub2+sub3 'Total' from student right join marks 
+    -> on student.rollno = marks.rollno;
++-----------+-------+
+| name      | Total |
++-----------+-------+
+| Priyanshu |   188 |
+| Neeraj    |  NULL |
+| Akhil     |   233 |
+| NULL      |    20 |
++-----------+-------+
+4 rows in set (0.19 sec)
+
+ERROR:
+No query specified
+</pre>
+      </div>
+
+      <div class="parts" id="cross">
+        <h2 class="secondary-headings">Cross join</h2>
+        <p class="text">The <b>CROSS JOIN</b> keyword returns all records from both tables (table1 and table2)</p>
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s)
+FROM table1
+CROSS JOIN table2; 
+</pre>
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student cross join marks;
++-----------+-------+
+| name      | Total |
++-----------+-------+
+| Akhil     |   188 |
+| Neeraj    |   188 |
+| Priyanshu |   188 |
+| Akhil     |   233 |
+| Neeraj    |   233 |
+| Priyanshu |   233 |
+| Akhil     |    20 |
+| Neeraj    |    20 |
+| Priyanshu |    20 |
++-----------+-------+
+9 rows in set (0.23 sec).
+</pre>
+
+      </div>
+
+      <div class="parts" id="self">
+        <h2 class="secondary-headings">Self Join</h2>
+        <p class="text">A <b>SELF JOIN</b> is a regular join, but the table is joined with itself.</p>
+        <p class="text"><b>Note :</b>T1 and T2 are different table aliases for the same table.</p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s)
+FROM table1 T1, table1 T2
+WHERE condition;
+</pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select s1.name,s2.name,s1.contact from student s1
+    -> , student s2 where s1.contact = s2.contact;
++-----------+-----------+------------+
+| name      | name      | contact    |
++-----------+-----------+------------+
+| Akhil     | Priyanshu | 1234567890 |
+| Neeraj    | Priyanshu | 1234567890 |
+| Priyanshu | Priyanshu | 1234567890 |
+| Akhil     | Neeraj    | 1234567890 |
+| Neeraj    | Neeraj    | 1234567890 |
+| Priyanshu | Neeraj    | 1234567890 |
+| Akhil     | Akhil     | 1234567890 |
+| Neeraj    | Akhil     | 1234567890 |
+| Priyanshu | Akhil     | 1234567890 |
++-----------+-----------+------------+
+9 rows in set (0.02 sec)
+</pre>
+
+      </div>
+      
+      <div class="parts" id="union">
+        <h2 class="secondary-headings">Union Operator</h2>
+        <p class="text">A <b>Union</b> operator is used to combine the result-set of two or more SELECT statements</p>
+        <ul class="list">
+          <li><p class="text">Every <b>SELECT</b> statement within <b>UNION</b> must have the same number of columns</p></li>
+          <li><p class="text">The columns must also have similar data types</p></li>
+          <li><p class="text">The columns in every <b>SELECT</b> statement must also be in the same order</p></li>
+        </ul>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2; 
+</pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.02 sec)
+
+mysql> select * from student2;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Aman      | 1234567890 |
+|      4 | Ak        | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student union select * from student2;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      3 | Aman      | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+</pre>
+
+      </div>
+
+      <div class="parts" id="union-all">
+        <h2 class="secondary-headings">Union All Operator</h2>
+        <p class="text">A <b>Union</b> operator selects only distinct values by default. To allow duplicate values, use <b>UNION ALL</b></p>
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s) FROM table1
+UNION ALL
+SELECT column_name(s) FROM table2;
+</pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.02 sec)
+
+mysql> select * from student2;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Aman      | 1234567890 |
+|      4 | Ak        | 1234567890 |
++--------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student union all select * from student2;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Aman      | 1234567890 |
+|      4 | Ak        | 1234567890 |
++--------+-----------+------------+
+7 rows in set (0.02 sec)
+</pre>
+
+      <div class="parts" id="intersect">
+        <h2 class="secondary-headings">Intersect Operator</h2>
+        <p class="text">The <b>INTERSECT</b> operator in SQL is used to retrieve the records that are identical/common between the result sets of two or more tables.</p>
+        <p class="text"><b>Note :</b> There is no such operator in MySQL instead you can use <b>inner join</b></p>
+  
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+</pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      3 | Akhil     | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student 
+    -> inner join marks on student.rollno = marks.rollno;
++-----------+-------+
+| name      | Total |
++-----------+-------+
+| Priyanshu |   188 |
+| Akhil     |   233 |
++-----------+-------+
+2 rows in set (0.00 sec)
+</pre>
+      </div>
+
+      <div class="parts" id="minus">
+        <h2 class="secondary-headings">Minus Operator</h2>
+        <p class="text">The <b>MINUS</b> operator is used to return all rows in the first SELECT statement that are not returned by the second SELECT statement.</p>
+        <p class="text"><b>Note :</b> There is no such operator in MySQL instead you can use <b>left join</b> with <b>where</b> clause</p>
+  
+        
+        <h3 class="tertiary-headings">Syntax:</h3>
+          <pre class="code-box">
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name
+WHERE table2.column_name IS NULL;
+</pre>
+
+          <h3 class="tertiary-headings">Example (with Output):</h3>
+          <pre class="code-box">
+mysql> select * from student;
++--------+-----------+------------+
+| rollno | name      | contact    |
++--------+-----------+------------+
+|      1 | Priyanshu | 1234567890 |
+|      2 | Neeraj    | 1234567890 |
+|      4 | Ak        | 1234567890 |
++--------+-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from marks;
++--------+------+------+------+
+| rollno | sub1 | sub2 | sub3 |
++--------+------+------+------+
+|      1 |   45 |   65 |   78 |
+|      3 |   55 |   81 |   97 |
+|      4 |   12 |    1 |    7 |
++--------+------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> select name,sub1+sub2+sub3 'Total' from student
+    -> left join marks on student.rollno = marks.rollno 
+    -> where marks.rollno is NULL;
++--------+-------+
+| name   | Total |
++--------+-------+
+| Neeraj |  NULL |
++--------+-------+
+1 row in set (0.00 sec)
+</pre>
+      </div>
+      
+  </section>
+</body>
+</main>
+
+</html>
