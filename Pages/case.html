@@ -26,17 +26,14 @@
     <main class="main">
       <section class="Sidebar">
         <a class="Sidebar-head" href="page.html">Case Study</a>
-        <a href="case1.html" target="_parent" class="sidebar-link">Case 1</a>
-        <a href="case2.html" target="_parent" class="sidebar-link">Case 2</a>
+        <a href="#case1" target="_parent" class="sidebar-link">Case 1</a>
+        <a href="#case2" target="_parent" class="sidebar-link">Case 2</a>
       </section>
 
     <section class="content">
-      <div class="parts" id="create-v">
-        <h2 class="secondary-headings">Create View Command</h2>
+      <div class="parts" id="case1">
+        <h2 class="secondary-headings">Case 1</h2>
         <p class="text">In SQL, a <b>view</b> is a virtual table based on the result-set of an SQL statement.</p>
-        <p class="text">A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.</p>
-        <p class="text">A view is created with the <b class="bold">CREATE VIEW </b> statement</p>
-        
         <h3 class="tertiary-headings">Syntax:</h3>
         <pre class="code-box">
 CREATE VIEW view_name AS
@@ -66,8 +63,8 @@ mysql> select * from view_std;
 </pre>
       </div>
 
-      <div class="parts" id="create-v2">
-        <h2 class="secondary-headings">Create or Replace View Command</h2>
+      <div class="parts" id="case2">
+        <h2 class="secondary-headings">Case 2</h2>
         <p class="text">A view can be updated with the <b>CREATE OR REPLACE VIEW</b> statement.</p>
         
           <h3 class="tertiary-headings">Syntax:</h3>
@@ -93,24 +90,6 @@ mysql> select * from view_std;
 3 rows in set (0.06 sec)
 </pre>
       </div>
-
-      <div class="parts" id="drop-view">
-        <h2 class="secondary-headings">Drop View Command</h2>
-        <p class="text">A view is deleted with the <b>DROP VIEW statement</p>
-
-          <h3 class="tertiary-headings">Syntax:</h3>
-          <pre class="code-box">
-DROP VIEW view_name;  </pre>
-            
-            <h3 class="tertiary-headings">Example (with Output):</h3>
-          <pre class="code-box">
-mysql> drop view view_std;
-Query OK, 0 rows affected (0.18 sec)
-
-mysql> select * from view_std;
-ERROR 1146 (42S02): Table 'temp.view_std' doesn't exist
-</pre>
-</div>
   </section>
 </body>
 </main>
