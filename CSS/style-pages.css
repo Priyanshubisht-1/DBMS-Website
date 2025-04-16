@@ -13,7 +13,6 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #fff;
   color: #333;
-  overflow-x: hidden;
   font-size: 10px;
 }
 
@@ -76,83 +75,6 @@ header {
 .btn-close {
   display: none;
 }
-/* Hero Section */
-.hero {
-  height: calc(100vh - 8rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 6rem;
-}
-
-.hero-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 120rem;
-  width: 100%;
-  gap: 6rem;
-}
-
-.text-content {
-  flex: 1;
-}
-
-.text-content h2 {
-  font-size: 5.6rem;
-  color: #e63946;
-  margin-bottom: 2rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.text-content p {
-  font-size: 1.8rem;
-  line-height: 1.5;
-  color: #555;
-  margin-bottom: 3rem;
-  max-width: 50rem;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.btn {
-  padding: 1.2rem 2.4rem;
-  font-size: 1.8rem;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.primary {
-  background-color: #e63946;
-  color: #fff;
-  border: none;
-}
-
-.primary:hover {
-  background-color: #c2182d;
-}
-
-.outline {
-  border: 2px solid #e63946;
-  color: #e63946;
-  background-color: transparent;
-}
-
-.outline:hover {
-  background-color: #ffe6e6;
-}
-
 /* main */
 
 .main {
@@ -174,6 +96,14 @@ header {
   overflow-y: scroll;
 }
 
+/* Sidebar */
+.Sidebar {
+  padding: 3rem 2rem;
+  min-width: 36rem;
+  overflow-y: scroll;
+  padding-bottom: 6rem;
+}
+
 .Sidebar-head {
   font-size: 3rem;
   font-weight: 600;
@@ -182,7 +112,6 @@ header {
   display: block;
   text-align: center;
   text-decoration: none;
-
   width: 100%;
 }
 .Sidebar-head:visited {
@@ -295,8 +224,6 @@ header {
   border: 2.5rem solid #ddd;
   margin-bottom: 4rem;
   overflow-x: auto;
-  /* scrollbar-width: none;
-  -ms-overflow-style: none; */
 }
 
 .code-box::-webkit-scrollbar {
@@ -318,31 +245,22 @@ header {
   html {
     font-size: 9px;
   }
-  .main {
-    height: calc(100vh- 9rem);
-    width: 100%;
-  }
-  .hero {
-    padding: 0 5rem;
-  }
-  .text-content h2 {
-    font-size: 5.2rem;
+  .sidebar-link {
+    font-size: 1.8rem;
   }
 }
 
 @media screen and (max-width: 918px) {
+  html,
   body {
     overflow: hidden;
-  }
-  .hero {
-    padding: 0 5rem;
   }
   header {
     padding: 0 3.4rem;
     position: relative;
   }
-  .main {
-    height: calc(100vh- 12rem);
+  header nav {
+    width: 100%;
   }
   .nav-links {
     display: flex;
@@ -369,7 +287,7 @@ header {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: calc(5rem - 5px);
+    top: 4rem;
     right: 2rem;
     transform: translate(-50%, -50%);
     border: none;
@@ -401,10 +319,11 @@ header {
     height: 100%;
     width: 100%;
     z-index: 500;
-    background-color: #2222222c;
+    background-color: #22222283;
     display: block;
     z-index: -1;
     transition: all 0.5s;
+    backdrop-filter: blur(1px);
     /* background-color: #c2182d; */
   }
   .sid-func .overlay {
@@ -435,30 +354,20 @@ header {
   .Sidebar {
     position: absolute;
     transform: translateX(-100%);
-    height: calc(100vh - 8rem);
     background-color: #fff;
+    height: 100%;
     opacity: 100;
     display: block;
-    max-width: 30rem;
-    min-width: 30rem;
+    max-width: 36rem;
+    min-width: 36rem;
     transition: all 0.4s;
     z-index: 600;
   }
 
   .sid-func .Sidebar {
-    height: calc(100vh- 9rem);
     transform: translateX(0%);
     opacity: 100;
     z-index: 600;
-  }
-
-  .text-content {
-    margin-top: 5rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 6rem;
   }
 
   .nav-links a {
@@ -486,63 +395,20 @@ header {
     z-index: 200;
     transform: translateX(0%);
   }
-
-  .text-content h2 {
-    margin-bottom: 3rem;
-  }
-
-  .text-content p {
-    max-width: 80%;
-    font-size: 2.2rem;
-    margin: 0 auto;
-    margin-bottom: 3rem;
-  }
-
-  .hero-content {
-    display: block;
-  }
-  .text-content h2 {
-    font-size: 5rem;
-  }
 }
 
 @media screen and (max-width: 584px) {
   html {
     font-size: 7px;
   }
-  .header {
+  header {
     padding: 0 2.4rem;
-  }
-  .text-content h2 {
-    font-size: 4.8rem;
-  }
-}
-
-@media screen and (max-width: 490px) {
-  .hero {
-    padding: 0 3rem;
-  }
-  .text-content h2 {
-    font-size: 4.6rem;
-  }
-  .text-content p {
-    width: 100%;
-    font-size: 1.9rem;
   }
 }
 
 @media screen and (max-width: 405px) {
   html {
     font-size: 6px;
-  }
-  .hero {
-    padding: 0 2rem;
-  }
-  .text-content h2 {
-    font-size: 4.3rem;
-  }
-  .text-content p {
-    font-size: 1.9rem;
   }
   .buttons {
     flex-direction: column;
