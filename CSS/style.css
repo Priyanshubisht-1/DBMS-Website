@@ -1,4 +1,4 @@
-/* Reset */
+w/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -191,6 +191,10 @@ body {
     height: calc(9rem - 1px);
   }
 
+  .main,.content,.Sidebar{
+    height: calc(100vh - 9rem + 1);
+  }
+  
   .hero {
     padding: 0 5rem;
   }
