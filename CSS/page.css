@@ -89,7 +89,7 @@ header {
 /* Sidebar */
 .Sidebar {
   padding: 3rem 2rem;
-  min-width: 36rem;
+  min-width: 50rem;
   overflow-y: scroll;
 }
 
