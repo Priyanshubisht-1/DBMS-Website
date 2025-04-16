@@ -27,11 +27,6 @@ header {
   z-index: 1000;
 }
 
-.header-clone {
-  height: 18rem;
-  background-color: #e63946;
-}
-
 .logo {
   height: 4.3rem;
   width: auto;
