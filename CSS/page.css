@@ -9,7 +9,6 @@
 
 html,
 body {
-  height: 100%;
   font-family: "Poppins", sans-serif;
   background-color: #fff;
   color: #333;
@@ -25,9 +24,6 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  position: fixed;
-  width: 100%;
-  top: 0;
   z-index: 1000;
 }
 
@@ -136,6 +132,7 @@ header {
   padding: 3rem;
   width: 100%;
   overflow-y: auto;
+  height: calc(100vh - 8rem);
 }
 
 .dbms-img {
@@ -315,7 +312,7 @@ header {
     position: absolute;
     transform: translateX(-100%);
     background-color: #fff;
-    height: 100%;
+    height: calc(100vh - 8rem);
     opacity: 100;
     display: block;
     max-width: 36rem;
