@@ -283,14 +283,11 @@ header {
     font-size: 9px;
   }
   .main {
-    height: calc(100vh- 9rem);
+    height: calc(100vh - 9rem);
     width: 100%;
   }
   .hero {
     padding: 0 5rem;
-  }
-  .text-content h2 {
-    font-size: 5.2rem;
   }
 }
 
