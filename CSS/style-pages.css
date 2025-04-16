@@ -251,7 +251,7 @@ header {
 @media screen and (max-width: 918px) {
   html,
   body {
-    overflow-y: auto;
+    overflow: hidden;
   }
   header {
     padding: 0 3.4rem;
