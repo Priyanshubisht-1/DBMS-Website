@@ -27,6 +27,11 @@ header {
   z-index: 1000;
 }
 
+.header-clone {
+  height: 18rem;
+  background-color: #e63946;
+}
+
 .logo {
   height: 4.3rem;
   width: auto;
@@ -79,6 +84,7 @@ header {
   display: flex;
   height: calc(100vh - 8rem);
   width: 100%;
+  overflow-y: scroll;
 }
 
 .overlay {
@@ -131,7 +137,7 @@ header {
 .content {
   padding: 3rem;
   width: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
   height: calc(100vh - 8rem);
 }
 
@@ -207,7 +213,7 @@ header {
 @media screen and (max-width: 918px) {
   html,
   body {
-    overflow: auto;
+    overflow-y: scroll;
   }
   header {
     padding: 0 3.4rem;
