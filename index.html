@@ -12,15 +12,50 @@
   </head>
   <body>
     <header>
-      <img src="Images/logo.png" alt="DB Master Logo" class="logo" />
-      <nav>
-        <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="Pages/page.html">Tutorials</a></li>
-          <li><a href="Pages/case.html">Case Study</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
+      <section class="header">
+        <img src="Images/logo.png" alt="DB Master Logo" class="logo" />
+        <nav>
+          <button href="#btn-links" class="btn-open">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="btn-img"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+
+          <button class="btn-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="btn-img"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="Pages/page.html">Tutorials</a></li>
+            <li><a href="Pages/case.html">Case Study</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </section>
     </header>
 
     <section class="hero">
@@ -41,5 +76,6 @@
         </div>
       </div>
     </section>
+    <script src="JS/script.js"></script>
   </body>
 </html>
