@@ -89,7 +89,7 @@ header {
 /* Sidebar */
 .Sidebar {
   padding: 3rem 2rem;
-  min-width: 50rem;
+  min-width: 36rem;
   overflow-y: scroll;
 }
 
@@ -196,15 +196,15 @@ header {
   color: #333;
 }
 
-.sidebar-link {
-    font-size: 1.8rem;
+.Sidebar .sidebar-link {
+  font-size: 1.8rem;
 }
 
 @media screen and (max-width: 1084px) {
   html {
     font-size: 9px;
   }
-  .sidebar-link {
+  .Sidebar .sidebar-link {
     font-size: 1.8rem;
   }
 }
@@ -212,7 +212,7 @@ header {
 @media screen and (max-width: 918px) {
   html,
   body {
-    overflow-y: auto;
+    overflow-y: scroll;
   }
   header {
     padding: 0 3.4rem;
@@ -358,9 +358,6 @@ header {
     z-index: 200;
     transform: translateX(0%);
   }
-  .sidebar-link {
-    font-size: 1.8rem;
-  }
 }
 
 @media screen and (max-width: 584px) {
@@ -369,9 +366,6 @@ header {
   }
   header {
     padding: 0 2.4rem;
-  }
-  .sidebar-link {
-    font-size: 1.8rem;
   }
 }
 
@@ -384,8 +378,5 @@ header {
   }
   .arch-img {
     height: 28rem;
-  }
-  .sidebar-link {
-    font-size: 1.8rem;
   }
 }

@@ -187,6 +187,10 @@ body {
   html {
     font-size: 9px;
   }
+  .header {
+    height: calc(9rem - 1px);
+  }
+
   .hero {
     padding: 0 5rem;
   }
