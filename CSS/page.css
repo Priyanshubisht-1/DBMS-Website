@@ -196,15 +196,11 @@ header {
   color: #333;
 }
 
-.Sidebar .sidebar-link {
-  font-size: 1.8rem;
-}
-
 @media screen and (max-width: 1084px) {
   html {
     font-size: 9px;
   }
-  .Sidebar .sidebar-link {
+  .sidebar-link {
     font-size: 1.8rem;
   }
 }
