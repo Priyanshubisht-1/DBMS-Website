@@ -343,8 +343,8 @@ header {
     border-radius: 0.9rem;
     padding: 0.5rem;
     border: none;
-    margin: 0 2rem;
     margin-top: 2rem;
+    margin-left: 2rem;
     border: 2px solid #e63946;
   }
 
