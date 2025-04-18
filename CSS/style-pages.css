@@ -402,7 +402,7 @@ header {
 
 @media screen and (max-width: 584px) {
   html {
-    font-size: 7px;
+    font-size: 8px;
   }
   header {
     padding: 0 2.4rem;
@@ -410,6 +410,9 @@ header {
 }
 
 @media screen and (max-width: 405px) {
+    html {
+    font-size: 7px;
+  }
   .buttons {
     flex-direction: column;
   }
