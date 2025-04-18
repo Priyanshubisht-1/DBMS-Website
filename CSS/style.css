@@ -80,7 +80,7 @@ body {
 
 /* Hero Section */
 .hero {
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 8rem);
   display: flex;
   align-items: center;
   justify-content: center;
