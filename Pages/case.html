@@ -77,61 +77,120 @@
     <section class="content">
       <div class="parts" id="case1">
         <h2 class="secondary-headings">Case 1</h2>
-        <p class="text">In SQL, a <b>view</b> is a virtual table based on the result-set of an SQL statement.</p>
-        <h3 class="tertiary-headings">Syntax:</h3>
+        <p class="text">To display the 1st, 2nd, and 3rd position holders (based on Total marks) from the student Table based on following conditions:</p>
+        <ul class="list">
+          <li><p class="text">The student must have scored <b>more than 60% marks</b> in each subject.</p></li>
+          <li><p class="text">The student must <b>not</b> have <b>failed</b> in any subject.</p></li>
+          <li><p class="text">The student must <b>not</b> be <b>absent</b> for any subject's exam.</p></li>
+        </ul>
+        <h3 class="tertiary-headings">Table:</h3>
         <pre class="code-box">
-CREATE VIEW view_name AS
-SELECT column1, column2, ...
-FROM table_name
-WHERE condition;  </pre>
+mysql> desc student_marks;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| sub1  | varchar(5)  | YES  |     | NULL    |       |
+| sub2  | varchar(5)  | YES  |     | NULL    |       |
+| sub3  | varchar(5)  | YES  |     | NULL    |       |
+| sub4  | varchar(5)  | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (1.37 sec)</pre>
+        <h3 class="tertiary-headings">Example (Table):</h3>
+        <pre class="code-box">
+mysql> select * from student_marks;
++------+-----------+------+------+------+------+
+| roll | name      | sub1 | sub2 | sub3 | sub4 |
++------+-----------+------+------+------+------+
+|    1 | Priyanshu | 86   | 87   | 92   | 93   |
+|    2 | Akhil     | 92   | 89   | 99   | 90   |
+|    3 | Neeraj    | 89   | 95   | 92   | 97   |
+|    4 | Nikhil    | 80   | 84   | 99   | 91   |
+|    5 | Raj       | 89   | 80   | NULL | 99   |
+|    6 | Vir       | 23   | 32   | 50   | A    |
+|    7 | Daksh     | A    | 99   | 89   | A    |
+|    8 | Suraj     | 61   | 45   | 12   | 60   |
+|    9 | Ram       | 81   | 95   | 22   | 90   |
+|   10 | Shyam     | 86   | 90   | 65   | 47   |
+|   11 | Sasha     | 61   | 72   | 64   | 89   |
+|   12 | Max       | 85   | 77   | 61   | 69   |
++------+-----------+------+------+------+------+
+12 rows in set (0.06 sec)</pre>
 
           <h3 class="tertiary-headings">Example (with Output):</h3>
           <pre class="code-box">
-mysql> create view view_std as select name from student;
-Query OK, 0 rows affected (1.14 sec)
-
-mysql> select * from view_std;
-+-----------+
-| name      |
-+-----------+
-| Anmol     |
-| Mario     |
-| Neeraj    |
-| Priyanshu |
-| Max       |
-| Neema     |
-| Krish     |
-| Rahul     |
-+-----------+
-8 rows in set (0.17 sec)
+mysql> select roll, name, sub1+sub2+sub3 as Total_Marks from student_marks 
+    -> where sub1 <> 'A' and sub1 > 60 and sub2 <> 'A' and sub2 > 60 and 
+    -> sub3 <> 'A' and sub3 > 60 order by Total_Marks desc limit 3;
++------+-----------+-------------+
+| roll | name      | Total_Marks |
++------+-----------+-------------+
+|    2 | Akhil     |         280 |
+|    3 | Neeraj    |         276 |
+|    1 | Priyanshu |         265 |
++------+-----------+-------------+
+3 rows in set (0.00 sec)
 </pre>
       </div>
 
       <div class="parts" id="case2">
         <h2 class="secondary-headings">Case 2</h2>
-        <p class="text">A view can be updated with the <b>CREATE OR REPLACE VIEW</b> statement.</p>
-        
-          <h3 class="tertiary-headings">Syntax:</h3>
-          <pre class="code-box">
-CREATE OR REPLACE VIEW view_name AS
-SELECT column1, column2, ...
-FROM table_name
-WHERE condition; </pre>
+        <p class="text">To display the 1st, 2nd, and 3rd position holders in <b>each subject</b> from the student Table based on following conditions:</p>
+        <ul class="list">
+          <li><p class="text">The student must have scored <b>more than 60% marks</b> in each subject.</p></li>
+          <li><p class="text">The student must <b>not</b> have <b>failed</b> in any subject.</p></li>
+          <li><p class="text">The student must <b>not</b> be <b>absent</b> for any subject's exam.</p></li>
+          <li><p class="text">In case of a tie, <b>total marks</b> must be used to rank student</p></li>
+        </ul>
+        <h3 class="tertiary-headings">Table:</h3>
+        <pre class="code-box">
+mysql> desc student_marks;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| sub1  | varchar(5)  | YES  |     | NULL    |       |
+| sub2  | varchar(5)  | YES  |     | NULL    |       |
+| sub3  | varchar(5)  | YES  |     | NULL    |       |
+| sub4  | varchar(5)  | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+6 rows in set (1.37 sec)</pre>
+        <h3 class="tertiary-headings">Example (Table):</h3>
+        <pre class="code-box">
+mysql> select * from student_marks;
++------+-----------+------+------+------+------+
+| roll | name      | sub1 | sub2 | sub3 | sub4 |
++------+-----------+------+------+------+------+
+|    1 | Priyanshu | 86   | 87   | 92   | 93   |
+|    2 | Akhil     | 92   | 89   | 99   | 90   |
+|    3 | Neeraj    | 89   | 95   | 92   | 97   |
+|    4 | Nikhil    | 80   | 84   | 99   | 91   |
+|    5 | Raj       | 89   | 80   | NULL | 99   |
+|    6 | Vir       | 23   | 32   | 50   | A    |
+|    7 | Daksh     | A    | 99   | 89   | A    |
+|    8 | Suraj     | 61   | 45   | 12   | 60   |
+|    9 | Ram       | 81   | 95   | 22   | 90   |
+|   10 | Shyam     | 86   | 90   | 65   | 47   |
+|   11 | Sasha     | 61   | 72   | 64   | 89   |
+|   12 | Max       | 85   | 77   | 61   | 69   |
++------+-----------+------+------+------+------+
+12 rows in set (0.06 sec)</pre>
 
           <h3 class="tertiary-headings">Example (with Output):</h3>
           <pre class="code-box">
-mysql> create or replace view view_std as select distinct course from student;
-Query OK, 0 rows affected (0.22 sec)
-
-mysql> select * from view_std;
-+--------+
-| course |
-+--------+
-| BCA    |
-| BCOM   |
-| BTECH  |
-+--------+
-3 rows in set (0.06 sec)
+mysql> select roll, name, sub1+sub2+sub3 as Total_Marks from student_marks 
+    -> where sub1 <> 'A' and sub1 > 60 and sub2 <> 'A' and sub2 > 60 and 
+    -> sub3 <> 'A' and sub3 > 60 order by Total_Marks desc limit 3;
++------+-----------+-------------+
+| roll | name      | Total_Marks |
++------+-----------+-------------+
+|    2 | Akhil     |         280 |
+|    3 | Neeraj    |         276 |
+|    1 | Priyanshu |         265 |
++------+-----------+-------------+
+3 rows in set (0.00 sec)
 </pre>
       </div>
   </section>
