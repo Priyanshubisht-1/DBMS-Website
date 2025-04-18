@@ -410,9 +410,6 @@ header {
 }
 
 @media screen and (max-width: 405px) {
-  html {
-    font-size: 6px;
-  }
   .buttons {
     flex-direction: column;
   }
