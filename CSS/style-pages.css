@@ -244,7 +244,7 @@ header {
   html {
     font-size: 9px;
   }
-  .header {
+  header {
     height: calc(9rem - 1px);
   }
   .main{
