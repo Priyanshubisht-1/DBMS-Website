@@ -120,15 +120,19 @@ mysql> select * from student_marks;
 
           <h3 class="tertiary-headings">Example (with Output):</h3>
           <pre class="code-box">
-mysql> select roll, name, sub1+sub2+sub3 as Total_Marks from student_marks 
-    -> where sub1 <> 'A' and sub1 > 60 and sub2 <> 'A' and sub2 > 60 and 
-    -> sub3 <> 'A' and sub3 > 60 order by Total_Marks desc limit 3;
+mysql> SELECT roll, name, sub1 + sub2 + sub3 + sub4 AS Total_Marks
+    -> FROM student_marks
+    -> WHERE sub1 IS NOT NULL AND sub2 IS NOT NULL AND sub3 IS NOT NULL AND sub4 IS NOT NULL
+    ->   AND sub1 != 'A' AND sub2 != 'A' AND sub3 != 'A' AND sub4 != 'A'
+    ->   AND sub1 > 60 AND sub2 > 60 AND sub3 > 60 AND sub4 > 60
+    -> ORDER BY Total_Marks DESC
+    -> LIMIT 3;
 +------+-----------+-------------+
 | roll | name      | Total_Marks |
 +------+-----------+-------------+
-|    2 | Akhil     |         280 |
-|    3 | Neeraj    |         276 |
-|    1 | Priyanshu |         265 |
+|    3 | Neeraj    |         373 |
+|    2 | Akhil     |         370 |
+|    1 | Priyanshu |         358 |
 +------+-----------+-------------+
 3 rows in set (0.00 sec)
 </pre>
@@ -180,17 +184,69 @@ mysql> select * from student_marks;
 
           <h3 class="tertiary-headings">Example (with Output):</h3>
           <pre class="code-box">
-mysql> select roll, name, sub1+sub2+sub3 as Total_Marks from student_marks 
-    -> where sub1 <> 'A' and sub1 > 60 and sub2 <> 'A' and sub2 > 60 and 
-    -> sub3 <> 'A' and sub3 > 60 order by Total_Marks desc limit 3;
-+------+-----------+-------------+
-| roll | name      | Total_Marks |
-+------+-----------+-------------+
-|    2 | Akhil     |         280 |
-|    3 | Neeraj    |         276 |
-|    1 | Priyanshu |         265 |
-+------+-----------+-------------+
-3 rows in set (0.00 sec)
+mysql> SELECT * FROM (
+    ->     SELECT roll, name, sub1 AS marks, 'sub1' AS subject
+    ->     FROM student_marks
+    ->     WHERE sub1 IS NOT NULL AND sub2 IS NOT NULL AND sub3 IS NOT NULL AND sub4 IS NOT NULL
+    ->       AND sub1 != 'A' AND sub2 != 'A' AND sub3 != 'A' AND sub4 != 'A'
+    ->       AND sub1 > 60 AND sub2 > 60 AND sub3 > 60 AND sub4 > 60
+    ->     ORDER BY sub1 + 0 DESC, sub1 + sub2 + sub3 + sub4 DESC
+    ->     LIMIT 3
+    -> ) AS t1
+    ->
+    -> UNION ALL
+    ->
+    -> SELECT * FROM (
+    ->     SELECT roll, name, sub2 AS marks, 'sub2' AS subject
+    ->     FROM student_marks
+    ->     WHERE sub1 IS NOT NULL AND sub2 IS NOT NULL AND sub3 IS NOT NULL AND sub4 IS NOT NULL
+    ->       AND sub1 != 'A' AND sub2 != 'A' AND sub3 != 'A' AND sub4 != 'A'
+    ->       AND sub1 > 60 AND sub2 > 60 AND sub3 > 60 AND sub4 > 60
+    ->     ORDER BY sub2 + 0 DESC, sub1 + sub2 + sub3 + sub4 DESC
+    ->     LIMIT 3
+    -> ) AS t2
+    ->
+    -> UNION ALL
+    ->
+    -> SELECT * FROM (
+    ->     SELECT roll, name, sub3 AS marks, 'sub3' AS subject
+    ->     FROM student_marks
+    ->     WHERE sub1 IS NOT NULL AND sub2 IS NOT NULL AND sub3 IS NOT NULL AND sub4 IS NOT NULL
+    ->       AND sub1 != 'A' AND sub2 != 'A' AND sub3 != 'A' AND sub4 != 'A'
+    ->       AND sub1 > 60 AND sub2 > 60 AND sub3 > 60 AND sub4 > 60
+    ->     ORDER BY sub3 + 0 DESC, sub1 + sub2 + sub3 + sub4 DESC
+    ->     LIMIT 3
+    -> ) AS t3
+    ->
+    -> UNION ALL
+    ->
+    -> SELECT * FROM (
+    ->     SELECT roll, name, sub4 AS marks, 'sub4' AS subject
+    ->     FROM student_marks
+    ->     WHERE sub1 IS NOT NULL AND sub2 IS NOT NULL AND sub3 IS NOT NULL AND sub4 IS NOT NULL
+    ->       AND sub1 != 'A' AND sub2 != 'A' AND sub3 != 'A' AND sub4 != 'A'
+    ->       AND sub1 > 60 AND sub2 > 60 AND sub3 > 60 AND sub4 > 60
+    ->     ORDER BY sub4 + 0 DESC, sub1 + sub2 + sub3 + sub4 DESC
+    ->     LIMIT 3
+    -> ) AS t4;
++------+-----------+-------+---------+
+| roll | name      | marks | subject |
++------+-----------+-------+---------+
+|    2 | Akhil     | 92    | sub1    |
+|    3 | Neeraj    | 89    | sub1    |
+|    1 | Priyanshu | 86    | sub1    |
+|    3 | Neeraj    | 95    | sub2    |
+|    2 | Akhil     | 89    | sub2    |
+|    1 | Priyanshu | 87    | sub2    |
+|    2 | Akhil     | 99    | sub3    |
+|    4 | Nikhil    | 99    | sub3    |
+|    3 | Neeraj    | 92    | sub3    |
+|    3 | Neeraj    | 97    | sub4    |
+|    1 | Priyanshu | 93    | sub4    |
+|    4 | Nikhil    | 91    | sub4    |
++------+-----------+-------+---------+
+12 rows in set (0.01 sec)
+
 </pre>
       </div>
   </section>
