@@ -240,7 +240,7 @@ header {
     height: calc(9rem - 1px);
   }
   .main {
-    height: calc(100vh - 9rem + 1px);
+    height: calc(100dvh - 9rem + 1px);
   }
   .sidebar-link {
     font-size: 1.8rem;
