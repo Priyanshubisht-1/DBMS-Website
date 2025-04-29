@@ -80,7 +80,6 @@ body {
 
 /* Hero Section */
 .hero {
-  height: calc(100vh - 8rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,7 +189,9 @@ body {
   .header {
     height: calc(9rem - 1px);
   }
-
+  .main {
+    height: calc(100dvh - 9rem + 1px);
+  }
   .hero {
     padding: 0 5rem;
   }
